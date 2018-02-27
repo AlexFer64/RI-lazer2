@@ -26,7 +26,7 @@ public class StaticExerciceParameter extends AppCompatActivity {
     //Constructeur
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTitle(getResources().getText(R.string.Static_Exercice));
+        setTitle(getResources().getText(R.string.static_exercice));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_static_exercice_parameter);
 
@@ -56,6 +56,7 @@ public class StaticExerciceParameter extends AppCompatActivity {
                 }
             }
         });
+        */
     }
 
     //getteur & setteur
