@@ -1,11 +1,11 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowNoTitle">true</item> <!-- Titre: si false, il y aura marqué LaZer en haut -->
+        <item name="android:windowFullscreen">true</item> <!-- true: enlever la barre du haut avec heure, batterie, notifs... -->
+        <item name="android:windowActionBar">false</item> <!-- si true laisse une barre en haut avec marqué le titre si NoTitle=false -->
     </style>
 
 </resources>
