@@ -1,5 +1,6 @@
 package com.projet15.lazer;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -21,6 +22,9 @@ public class StaticExerciceParameter extends AppCompatActivity implements TextWa
     private Button _startButton;
     private TextView _errorText;
 
+
+    //Parameter
+     public Parameter parametreDeLexercice;
     //Constructeur
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +44,24 @@ public class StaticExerciceParameter extends AppCompatActivity implements TextWa
         get_startButton().setEnabled(false);
 
         //mise a l'écoute du changement du texte dans les champs pour validation du formulaire
-        _patientNameET.addTextChangedListener(this); //Mth addTextChangedListener() ne
-        _operatorNameET.addTextChangedListener(this);//fonctionne pas avec les
-        _markDistanceET.addTextChangedListener(this);//getteur ou setteur11
-        _timeET.addTextChangedListener(this);
-        //Evenement clique sur le bouton start
+        get_patientNameET().addTextChangedListener(this);
+        get_operatorNameET().addTextChangedListener(this);
+        get_markDistanceET().addTextChangedListener(this);
+        get_timeET().addTextChangedListener(this);
 
+        //Evenement clique sur le bouton start
+        get_startButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                parametreDeLexercice = new Parameter(1,get_patientNameET().toString(),
+                                                    get_operatorNameET().toString(),
+                                                    Float.parseFloat(get_markDistanceET().toString()),
+                                                    Integer.parseInt(get_timeET().toString()
+                                                    ));
+                
+
+            }
+        });
     }
 
     //getteur & setteur
