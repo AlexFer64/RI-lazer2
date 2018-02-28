@@ -2,13 +2,15 @@ package com.projet15.lazer;
 import android.annotation.SuppressLint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
 
-public class StaticExerciceParameter extends AppCompatActivity {
+public class StaticExerciceParameter extends AppCompatActivity implements TextWatcher {
 
     //Variables
         //Objet graphique
@@ -18,15 +20,11 @@ public class StaticExerciceParameter extends AppCompatActivity {
     private EditText _timeET;
     private Button _startButton;
     private TextView _errorText;
-        //valeurs parametre
-    private String _patientName;
-    private String _operatorName;
-    private  int _markDistance;
-    private  int _time;
+
     //Constructeur
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTitle(getResources().getText(R.string.static_exercice));
+        setTitle(getResources().getText(R.string.Static_Exercice));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_static_exercice_parameter);
 
@@ -37,25 +35,17 @@ public class StaticExerciceParameter extends AppCompatActivity {
         set_timeET((EditText) findViewById(R.id.TIME_EDITTEXT_ID));
         set_startButton((Button) findViewById(R.id.START_BUTTON_ID));
         set_errorText((TextView) findViewById(R.id.ERROR_TEXT_ID));
+
+        //Désactivation du bouton au lancement (peut etre temporaire)
+        get_startButton().setEnabled(false);
+
+        //mise a l'écoute du changement du texte dans les champs pour validation du formulaire
+        _patientNameET.addTextChangedListener(this); //Mth addTextChangedListener() ne
+        _operatorNameET.addTextChangedListener(this);//fonctionne pas avec les
+        _markDistanceET.addTextChangedListener(this);//getteur ou setteur11
+        _timeET.addTextChangedListener(this);
         //Evenement clique sur le bouton start
-        get_startButton().setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("ResourceAsColor")
-            @Override
-            public void onClick(View view) {
-                if(get_patientNameET().getText().toString().length() != 0 ||
-                        get_operatorNameET().getText().toString().length() != 0 ||
-                        get_markDistanceET().getText().toString().length() != 0 ||
-                        get_timeET().getText().toString().length() != 0){
 
-                }
-                else {
-
-                    get_errorText().setText("You haven't fill everything out");
-
-                    //RECCURCIVITE
-                }
-            }
-        });
     }
 
     //getteur & setteur
@@ -90,36 +80,40 @@ public class StaticExerciceParameter extends AppCompatActivity {
         return _startButton;
     }
 
-    //Généré automatiquement
-    public String get_patientName() {
-        return _patientName;
-    }
-    public void set_patientName(String _patientName) {
-        this._patientName = _patientName;
-    }
-    public String get_operatorName() {
-        return _operatorName;
-    }
-    public void set_operatorName(String _operatorName) {
-        this._operatorName = _operatorName;
-    }
-    public int get_markDistance() {
-        return _markDistance;
-    }
-    public void set_markDistance(int _markDistance) {
-        this._markDistance = _markDistance;
-    }
-    public int get_time() {
-        return _time;
-    }
-    public void set_time(int _time) {
-        this._time = _time;
-    }
     public TextView get_errorText() {
         return _errorText;
     }
     public void set_errorText(TextView _errorText) {
         this._errorText = _errorText;
     }
+
+    //Premiere vérification : Formulaire compet
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        /*Activation du bouton quand tous les champs sont remplis
+        permet d'évité la transmition d'un formulaire vide ou incomplet*/
+        get_startButton().setEnabled((get_patientNameET().toString().length() != 0 &&
+                                      get_operatorNameET().toString().length() != 0&&
+                                      get_markDistanceET().toString().length() != 0&&
+                                      get_timeET().toString().length() != 0 ));
+
+        if(!get_startButton().isEnabled()) {
+            get_errorText().setText("You haven't fild everyting"); //Message d'avertissement quand
+                                                                    //tous les champs du formulaire ne sont pas remplis
+        }
+    }
+    //Obligation de les re-declarer.
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+    @Override
+    public void afterTextChanged(Editable editable) {
+
+    }
+
+
+
+
     //Méthode
 }
