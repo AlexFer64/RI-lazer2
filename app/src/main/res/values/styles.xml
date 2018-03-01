@@ -1,11 +1,20 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppThemeMenuPrincipal" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="android:windowNoTitle">true</item> <!-- Titre: si false, il y aura marqué LaZer en haut -->
         <item name="android:windowFullscreen">true</item> <!-- true: enlever la barre du haut avec heure, batterie, notifs... -->
         <item name="android:windowActionBar">false</item> <!-- si true laisse une barre en haut avec marqué le titre si NoTitle=false -->
+    </style>
+
+    <style name="AppThemeStaticExerciceParameter" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:windowNoTitle">false</item> <!-- Titre: si false, il y aura marqué LaZer en haut -->
+        <item name="android:windowFullscreen">true</item> <!-- true: enlever la barre du haut avec heure, batterie, notifs... -->
+        <item name="android:windowActionBar">true</item> <!-- si true laisse une barre en haut avec marqué le titre si NoTitle=false -->
+        <item name="android">@color/ROUGE_CHARTE_GRAPHIQUE</item>
+
     </style>
 
 </resources>
