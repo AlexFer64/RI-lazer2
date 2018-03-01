@@ -7,8 +7,4 @@
     <dimen name="MARGIN_LEFT_BUTTON">50dip</dimen>
     <dimen name="MARGIN_RIGHT_BUTTON">50dip</dimen>
     <!-- Static Exercice Parameter -->
-    <dimen name="MARGIN_TOP_FRAMELAYOUTFORMULAIRE">10dip</dimen>
-    <dimen name="MARGIN_BOTTOM_FRAMELAYOUTFORMULAIRE">10dip</dimen>
-    <dimen name="MARGIN_LEFT_FRAMELAYOUTFORMULAIRE">10dip</dimen>
-    <dimen name="MARGIN_RIGHT_FRAMELAYOUTFORMULAIRE">10dip</dimen>
 </resources>
