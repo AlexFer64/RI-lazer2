@@ -73,7 +73,7 @@ public class StaticExerciceParameter extends AppCompatActivity {
                 submitForm();
 
             }
-        });
+        });*/
     }
 
     //Getteur Setteur
