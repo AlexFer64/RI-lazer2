@@ -5,22 +5,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextSwitcher;
-import android.widget.TextView;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 public class StaticExerciceParameter extends AppCompatActivity {
     private Toolbar toolbar;
-    private EditText inputName, inputEmail, inputPassword;
-    private TextInputLayout inputLayoutName, inputLayoutEmail, inputLayoutPassword;
-    private Button btnSignUp;
+    private EditText patientName, operatorName, markDistance, time;
+    private TextInputLayout layoutPatientName, layoutOperatorName, layoutMarkDistance, layoutTime;
+    private Button buttonStart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,19 +29,22 @@ public class StaticExerciceParameter extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        inputLayoutName = (TextInputLayout) findViewById(R.id.input_layout_name);
-        inputLayoutEmail = (TextInputLayout) findViewById(R.id.input_layout_email);
-        inputLayoutPassword = (TextInputLayout) findViewById(R.id.input_layout_password);
-        inputName = (EditText) findViewById(R.id.input_name);
-        inputEmail = (EditText) findViewById(R.id.input_email);
-        inputPassword = (EditText) findViewById(R.id.input_password);
-        btnSignUp = (Button) findViewById(R.id.btn_signup);
+        //textInputLayout
+        layoutPatientName = (TextInputLayout) findViewById(R.id.PATIENT_NAME_LAYOUT_ID);
+        layoutOperatorName = (TextInputLayout) findViewById(R.id.OPERATOR_NAME_LAYOUT_ID);
+        layoutMarkDistance = (TextInputLayout) findViewById(R.id.MARK_DISTANCE_LAYOUT_ID);
+        layoutTime = (TextInputLayout) findViewById(R.id.TIME_LAYOUT_ID);
 
-        inputName.addTextChangedListener(new MyTextWatcher(inputName));
-        inputEmail.addTextChangedListener(new MyTextWatcher(inputEmail));
-        inputPassword.addTextChangedListener(new MyTextWatcher(inputPassword));
+        //editText
+        patientName = (EditText) findViewById(R.id.PATIENT_NAME_EDITTEXT_ID);
+        operatorName = (EditText) findViewById(R.id.OPERATOR_NAME_EDITTEXT_ID);
+        markDistance = (EditText) findViewById(R.id.MARK_DISTANCE_EDITTEXT_ID);
+        time = (EditText) findViewById(R.id.TIME_EDITTEXT_ID);
 
-        btnSignUp.setOnClickListener(new View.OnClickListener() {
+        buttonStart = (Button) findViewById(R.id.START_BUTTON_ID);
+
+
+        buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 submitForm();
@@ -50,65 +52,76 @@ public class StaticExerciceParameter extends AppCompatActivity {
         });
     }
 
-    /**
-     * Validating form
-     */
+    //Validation formulaire
     private void submitForm() {
-        if (!validateName()) {
+        if (!validatePatientName()) { //si le nom du patient n'est pas valide
+            return; //on valide pas le formulaire
+        }
+
+        if (!validateOperatorName()) {
             return;
         }
 
-        if (!validateEmail()) {
+        if (!validateMarkDistance()) {
             return;
         }
 
-        if (!validatePassword()) {
+        if (!validateTime()) {
             return;
         }
 
-        Toast.makeText(getApplicationContext(), "Thank You!", Toast.LENGTH_SHORT).show();
+        //sinon on passe à la vue suivante (CODE A RAJOUTER)
+
+        Toast.makeText(getApplicationContext(), "la vue suivante n'existe pas encore", Toast.LENGTH_SHORT).show();
     }
 
-    private boolean validateName() {
-        if (inputName.getText().toString().trim().isEmpty()) {
-            inputLayoutName.setError(getString(R.string.Err_Patient_Name));
-            requestFocus(inputName);
+    private boolean validatePatientName() {
+        //trim() enlève les espaces
+        if (patientName.getText().toString().trim().isEmpty()) { //si le nom du patient est vide
+            layoutPatientName.setError(getString(R.string.Err_Patient_Name)); //on met en message d'erreur Err_Patient_Name
+            requestFocus(patientName);
+            return false; //est on return false (nom non-validé)
+        } else {
+            layoutPatientName.setErrorEnabled(false); //sinon le patientName est valide donc si le patientName a déjà été validé on enlève le message d'erreur
+        }
+
+        return true; //et on retourne true(nom validé)
+    }
+
+    private boolean validateOperatorName() {
+        if (operatorName.getText().toString().trim().isEmpty()) {
+            layoutOperatorName.setError(getString(R.string.Err_Operator_Name));
+            requestFocus(operatorName);
             return false;
         } else {
-            inputLayoutName.setErrorEnabled(false);
+            layoutOperatorName.setErrorEnabled(false);
         }
 
         return true;
     }
 
-    private boolean validateEmail() {
-        String email = inputEmail.getText().toString().trim();
-
-        if (email.isEmpty() || !isValidEmail(email)) {
-            inputLayoutEmail.setError(getString(R.string.Err_Operator_Name));
-            requestFocus(inputEmail);
+    private boolean validateMarkDistance() {
+        if (markDistance.getText().toString().trim().isEmpty()) {
+            layoutMarkDistance.setError(getString(R.string.Err_Mark_Distance));
+            requestFocus(markDistance);
             return false;
         } else {
-            inputLayoutEmail.setErrorEnabled(false);
+            layoutMarkDistance.setErrorEnabled(false);
         }
 
         return true;
     }
 
-    private boolean validatePassword() {
-        if (inputPassword.getText().toString().trim().isEmpty()) {
-            inputLayoutPassword.setError(getString(R.string.Err_Mark_Distance));
-            requestFocus(inputPassword);
+    private boolean validateTime() {
+        if (time.getText().toString().trim().isEmpty()) {
+            layoutTime.setError(getString(R.string.Err_Time));
+            requestFocus(time);
             return false;
         } else {
-            inputLayoutPassword.setErrorEnabled(false);
+            layoutTime.setErrorEnabled(false);
         }
 
         return true;
-    }
-
-    private static boolean isValidEmail(String email) {
-        return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     private void requestFocus(View view) {
@@ -117,33 +130,5 @@ public class StaticExerciceParameter extends AppCompatActivity {
         }
     }
 
-    private class MyTextWatcher implements TextWatcher {
-
-        private View view;
-
-        private MyTextWatcher(View view) {
-            this.view = view;
-        }
-
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        }
-
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        }
-
-        public void afterTextChanged(Editable editable) {
-            switch (view.getId()) {
-                case R.id.input_name:
-                    validateName();
-                    break;
-                case R.id.input_email:
-                    validateEmail();
-                    break;
-                case R.id.input_password:
-                    validatePassword();
-                    break;
-            }
-        }
-    }
 
 }
