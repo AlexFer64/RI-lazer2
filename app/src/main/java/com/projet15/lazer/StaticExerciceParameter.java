@@ -7,119 +7,143 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
+import android.support.design.widget.TextInputLayout;
+import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.Toast;
 
 public class StaticExerciceParameter extends AppCompatActivity {
+    private Toolbar toolbar;
+    private EditText inputName, inputEmail, inputPassword;
+    private TextInputLayout inputLayoutName, inputLayoutEmail, inputLayoutPassword;
+    private Button btnSignUp;
 
-    //Variables
-        //Objet graphique
-    private EditText _patientNameET;
-    private EditText _operatorNameET;
-    private EditText _markDistanceET;
-    private EditText _timeET;
-    private Button _startButton;
-    private TextView _errorText;
-        //valeurs parametre
-    private String _patientName;
-    private String _operatorName;
-    private  int _markDistance;
-    private  int _time;
-    //Constructeur
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_static_exercice_parameter);
 
-        //association des objet graphique avec les composant graphique
-        set_patientNameET((EditText) findViewById(R.id.PATIENT_NAME_EDITTEXT_ID));
-        set_operatorNameET((EditText) findViewById(R.id.OPERATOR_NAME_EDITTEXT_ID));
-        set_markDistanceET((EditText) findViewById(R.id.MARKDISTANCE_NAME_EDITTEXT_ID));
-        set_timeET((EditText) findViewById(R.id.TIME_EDITTEXT_ID));
-        set_startButton((Button) findViewById(R.id.START_BUTTON_ID));
-        set_errorText((TextView) findViewById(R.id.ERROR_TEXT_ID));
-        //Evenement clique sur le bouton start
-        get_startButton().setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("ResourceAsColor")
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        inputLayoutName = (TextInputLayout) findViewById(R.id.input_layout_name);
+        inputLayoutEmail = (TextInputLayout) findViewById(R.id.input_layout_email);
+        inputLayoutPassword = (TextInputLayout) findViewById(R.id.input_layout_password);
+        inputName = (EditText) findViewById(R.id.input_name);
+        inputEmail = (EditText) findViewById(R.id.input_email);
+        inputPassword = (EditText) findViewById(R.id.input_password);
+        btnSignUp = (Button) findViewById(R.id.btn_signup);
+
+        inputName.addTextChangedListener(new MyTextWatcher(inputName));
+        inputEmail.addTextChangedListener(new MyTextWatcher(inputEmail));
+        inputPassword.addTextChangedListener(new MyTextWatcher(inputPassword));
+
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(get_patientNameET().getText().toString().length() != 0 ||
-                        get_operatorNameET().getText().toString().length() != 0 ||
-                        get_markDistanceET().getText().toString().length() != 0 ||
-                        get_timeET().getText().toString().length() != 0){
-
-                }
-                else {
-
-                    get_errorText().setText("You haven't fill everything out");
-
-                    //RECCURCIVITE
-                }
+                submitForm();
             }
         });
-
     }
 
-    //getteur & setteur
-    public void set_patientNameET(EditText t){
-        _patientNameET = t;
-    }
-    public EditText get_patientNameET(){
-        return _patientNameET;
-    }
-    public void set_operatorNameET(EditText t){
-        _operatorNameET = t;
-    }
-    public EditText get_operatorNameET(){
-        return _operatorNameET;
-    }
-    public void set_markDistanceET(EditText t){
-        _markDistanceET = t;
-    }
-    public EditText get_markDistanceET(){
-        return _markDistanceET;
-    }
-    public void set_timeET(EditText t){
-        _timeET = t;
-    }
-    public EditText get_timeET(){
-        return _timeET;
-    }
-    public void set_startButton(Button b){
-        _startButton = b;
-    }
-    public Button get_startButton(){
-        return _startButton;
+    /**
+     * Validating form
+     */
+    private void submitForm() {
+        if (!validateName()) {
+            return;
+        }
+
+        if (!validateEmail()) {
+            return;
+        }
+
+        if (!validatePassword()) {
+            return;
+        }
+
+        Toast.makeText(getApplicationContext(), "Thank You!", Toast.LENGTH_SHORT).show();
     }
 
-    //Généré automatiquement
-    public String get_patientName() {
-        return _patientName;
+    private boolean validateName() {
+        if (inputName.getText().toString().trim().isEmpty()) {
+            inputLayoutName.setError(getString(R.string.Err_Patient_Name));
+            requestFocus(inputName);
+            return false;
+        } else {
+            inputLayoutName.setErrorEnabled(false);
+        }
+
+        return true;
     }
-    public void set_patientName(String _patientName) {
-        this._patientName = _patientName;
+
+    private boolean validateEmail() {
+        String email = inputEmail.getText().toString().trim();
+
+        if (email.isEmpty() || !isValidEmail(email)) {
+            inputLayoutEmail.setError(getString(R.string.Err_Operator_Name));
+            requestFocus(inputEmail);
+            return false;
+        } else {
+            inputLayoutEmail.setErrorEnabled(false);
+        }
+
+        return true;
     }
-    public String get_operatorName() {
-        return _operatorName;
+
+    private boolean validatePassword() {
+        if (inputPassword.getText().toString().trim().isEmpty()) {
+            inputLayoutPassword.setError(getString(R.string.Err_Mark_Distance));
+            requestFocus(inputPassword);
+            return false;
+        } else {
+            inputLayoutPassword.setErrorEnabled(false);
+        }
+
+        return true;
     }
-    public void set_operatorName(String _operatorName) {
-        this._operatorName = _operatorName;
+
+    private static boolean isValidEmail(String email) {
+        return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
-    public int get_markDistance() {
-        return _markDistance;
+
+    private void requestFocus(View view) {
+        if (view.requestFocus()) {
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
     }
-    public void set_markDistance(int _markDistance) {
-        this._markDistance = _markDistance;
+
+    private class MyTextWatcher implements TextWatcher {
+
+        private View view;
+
+        private MyTextWatcher(View view) {
+            this.view = view;
+        }
+
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        public void afterTextChanged(Editable editable) {
+            switch (view.getId()) {
+                case R.id.input_name:
+                    validateName();
+                    break;
+                case R.id.input_email:
+                    validateEmail();
+                    break;
+                case R.id.input_password:
+                    validatePassword();
+                    break;
+            }
+        }
     }
-    public int get_time() {
-        return _time;
-    }
-    public void set_time(int _time) {
-        this._time = _time;
-    }
-    public TextView get_errorText() {
-        return _errorText;
-    }
-    public void set_errorText(TextView _errorText) {
-        this._errorText = _errorText;
-    }
-    //Méthode
+
 }

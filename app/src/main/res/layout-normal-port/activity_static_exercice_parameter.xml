@@ -1,161 +1,79 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--suppress ALL -->
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.projet15.lazer.StaticExerciceParameter">
+    android:layout_height="match_parent">
 
-    <TableLayout
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <TableRow
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:titleTextColor="#000000"/>
+    </android.support.design.widget.AppBarLayout>
 
-        <TableRow
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="60dp">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_name"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/PATIENT_NAME_TEXT_ID"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="@string/Patient_Name"
-                android:textSize="18sp" />
+            android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/PATIENT_NAME_EDITTEXT_ID"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="12dp"
-                android:autoLink="phone"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:textAlignment="viewStart"
-                android:visibility="visible" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/OPERATOR_NAME_TEXT_ID2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="@string/Operator_Name"
-                android:textSize="18sp" />
-
-            <EditText
-                android:id="@+id/OPERATOR_NAME_EDITTEXT_ID"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="12dp"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:textAlignment="viewStart"
-                android:visibility="visible" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/MARKDISTANCE_TEXT_ID2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="@string/Mark_Distance"
-                android:textSize="18sp" />
-
-            <EditText
-                android:id="@+id/MARKDISTANCE_NAME_EDITTEXT_ID"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="12dp"
-                android:layout_weight="-2"
-                android:ems="10"
-                android:gravity="start"
-                android:inputType="textPersonName|numberDecimal"
-                android:selectAllOnFocus="false"
-                android:singleLine="false"
-                android:textAlignment="viewStart"
-                android:visibility="visible" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/TIME_TEXT_ID"
+                android:id="@+id/input_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="@string/Time"
-                android:textSize="18sp" />
+                android:singleLine="true"
+                android:hint="@string/Patient_Name" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/TIME_EDITTEXT_ID"
-                android:layout_width="wrap_content"
+                android:id="@+id/input_email"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="12dp"
-                android:ems="10"
-                android:gravity="start"
-                android:inputType="textPersonName|numberDecimal"
-                android:textAlignment="viewStart" />
+                android:inputType="textEmailAddress"
+                android:hint="@string/Operator_Name" />
+        </android.support.design.widget.TextInputLayout>
 
-        </TableRow>
-
-        <TableRow
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_password"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/FINALBIP_TEXT_ID"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/input_password"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="@string/Final_Bip"
-                android:textSize="18sp" />
+                android:inputType="textPassword"
+                android:hint="@string/Mark_Distance" />
+        </android.support.design.widget.TextInputLayout>
 
-        </TableRow>
+        <Button android:id="@+id/btn_signup"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Start_Button"
+            android:background="@color/GRIS_CHARTE_GRAPHIQUE"
+            android:layout_marginTop="40dp"
+            android:textColor="@android:color/white"/>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    </LinearLayout>
 
-            <Button
-                android:id="@+id/START_BUTTON_ID"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/Start_Button" />
-
-            <TextView
-                android:id="@+id/ERROR_TEXT_ID"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/COLOR_ERROR"
-                android:textSize="24sp" />
-
-        </TableRow>
-
-    </TableLayout>
-
-</android.support.constraint.ConstraintLayout>
+</android.support.design.widget.CoordinatorLayout>

@@ -8,9 +8,13 @@
 
     <!-- Texte Parametres-->
     <string name="Patient_Name">Patient name</string>
+    <string name="Err_Patient_Name">pn</string>
     <string name="Operator_Name">Operator name</string>
+    <string name="Err_Operator_Name">on</string>
     <string name="Mark_Distance">Mark distance (cm) </string>
+    <string name="Err_Mark_Distance">md</string>
     <string name="Time">Time (s)</string>
+    <string name="Err_Time">t</string>
     <string name="Final_Bip">Final Bip</string>
     <string name="Start_Button">START</string>
 
