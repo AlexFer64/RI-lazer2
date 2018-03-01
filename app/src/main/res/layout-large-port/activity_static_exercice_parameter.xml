@@ -1,101 +1,93 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.projet15.lazer.MenuPrincipal">
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:titleTextColor="@android:color/black"/>
+    </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_marginTop="?attr/actionBarSize"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="20dp">
 
-        <FrameLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="10">
-            <TextView
-                android:layout_width="wrap_content"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/PATIENT_NAME_LAYOUT_ID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/PATIENT_NAME_EDITTEXT_ID"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/TAILLE_TEXTE_BOUTON"
-                android:textStyle="bold"
-                android:text="@string/PROVISOIRE_LOGO_APPLICATION"
-                android:layout_gravity="center"/>
-        </FrameLayout>
+                android:singleLine="true"
+                android:inputType="textPersonName"
+                android:hint="@string/Patient_Name" />
+        </android.support.design.widget.TextInputLayout>
 
-        <FrameLayout
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/OPERATOR_NAME_LAYOUT_ID"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="10">
+            android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/STATIC_BUTTON_ID"
+            <EditText
+                android:id="@+id/OPERATOR_NAME_EDITTEXT_ID"
                 android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_marginTop="@dimen/MARGIN_TOP_BUTTON"
-                android:layout_marginBottom="@dimen/MARGIN_BOTTOM_BUTTON"
-                android:layout_marginStart="@dimen/MARGIN_LEFT_BUTTON"
-                android:layout_marginLeft="@dimen/MARGIN_LEFT_BUTTON"
-                android:layout_marginEnd="@dimen/MARGIN_RIGHT_BUTTON"
-                android:layout_marginRight="@dimen/MARGIN_RIGHT_BUTTON"
-                android:background="@color/ROUGE_CHARTE_GRAPHIQUE"
-                android:textAllCaps="false"
-                android:textSize="@dimen/TAILLE_TEXTE_BOUTON"
-                android:text="@string/STATIC_EXERCICE" />
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="@string/Operator_Name" />
+        </android.support.design.widget.TextInputLayout>
 
-        </FrameLayout>
-
-        <FrameLayout
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/MARK_DISTANCE_LAYOUT_ID"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="10">
+            android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/RYTHM_BUTTON_ID"
+            <EditText
+                android:id="@+id/MARK_DISTANCE_EDITTEXT_ID"
                 android:layout_width="match_parent"
-                android:layout_height="fill_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:hint="@string/Mark_Distance" />
+        </android.support.design.widget.TextInputLayout>
 
-                android:layout_marginTop="@dimen/MARGIN_TOP_BUTTON"
-                android:layout_marginBottom="@dimen/MARGIN_BOTTOM_BUTTON"
-                android:layout_marginStart="@dimen/MARGIN_LEFT_BUTTON"
-                android:layout_marginLeft="@dimen/MARGIN_LEFT_BUTTON"
-                android:layout_marginEnd="@dimen/MARGIN_RIGHT_BUTTON"
-                android:layout_marginRight="@dimen/MARGIN_RIGHT_BUTTON"
-                android:background="@color/ROUGE_CHARTE_GRAPHIQUE"
-                android:textSize="@dimen/TAILLE_TEXTE_BOUTON"
-                android:textAllCaps="false"
-                android:text="@string/RYTHM_EXERCICE" />
-
-        </FrameLayout>
-
-        <FrameLayout
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/TIME_LAYOUT_ID"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="10">
+            android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/DATAMANAGER_BUTTON_ID"
+            <EditText
+                android:id="@+id/TIME_EDITTEXT_ID"
                 android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_marginTop="@dimen/MARGIN_TOP_BUTTON"
-                android:layout_marginBottom="@dimen/MARGIN_BOTTOM_BUTTON"
-                android:layout_marginStart="@dimen/MARGIN_LEFT_BUTTON"
-                android:layout_marginLeft="@dimen/MARGIN_LEFT_BUTTON"
-                android:layout_marginEnd="@dimen/MARGIN_RIGHT_BUTTON"
-                android:layout_marginRight="@dimen/MARGIN_RIGHT_BUTTON"
-                android:background="@color/ROUGE_CHARTE_GRAPHIQUE"
-                android:textSize="@dimen/TAILLE_TEXTE_BOUTON"
-                android:textAllCaps="false"
-                android:text="@string/DATA_MANAGER" />
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:hint="@string/Time"/>
+        </android.support.design.widget.TextInputLayout>
 
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="11.5"/>
+        <Button android:id="@+id/START_BUTTON_ID"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Start_Button"
+            android:background="@color/GRIS_CHARTE_GRAPHIQUE"
+            android:layout_marginTop="40dp"
+            android:textColor="@android:color/black"/>
 
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+</android.support.design.widget.CoordinatorLayout>
