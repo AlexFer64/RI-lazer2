@@ -1,9 +1,9 @@
 <resources>
 
     <!-- Base application theme. -->
-<<<<<<< HEAD
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-=======
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar"/>
+
     <style name="AppThemeMenuPrincipal" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="android:windowNoTitle">true</item> <!-- Titre: si false, il y aura marqué LaZer en haut -->
@@ -12,7 +12,7 @@
     </style>
 
     <style name="AppThemeStaticExerciceParameter" parent="Theme.AppCompat.Light.NoActionBar">
->>>>>>> interfaceMAJ
+
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>

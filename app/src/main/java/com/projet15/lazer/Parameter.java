@@ -76,7 +76,7 @@ public class Parameter {
         return _time;
     }
 
-    public void set_time(float _time) {
+    public void set_time(int _time) {
         this._time = _time;
     }
 
