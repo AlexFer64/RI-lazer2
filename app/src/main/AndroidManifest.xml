@@ -7,7 +7,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="@string/APP_NAME"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
         <activity android:name=".MenuPrincipal"
@@ -23,7 +23,7 @@
         <activity android:name=".StaticExerciceParameter"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeStaticExerciceParameter"
-            android:label="@string/Static_Exercice">
+            android:label="@string/STATIC_EXERCICE">
 
         </activity>
     </application>

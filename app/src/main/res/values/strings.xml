@@ -1,9 +1,11 @@
 <resources>
     <!--Menu Principal -->
-    <string name="app_name">LaZer</string>
-    <string name="Static_Exercice">Static Exercice</string>
-    <string name="Rhythm_Exercice">Rhythm Exercice</string>
-    <string name="Data_Manager">Data Manager</string>
+    <string name="APP_NAME">LaZer</string>
+    <string name="STATIC_EXERCICE">Static Exercice</string>
+    <string name="RYTHM_EXERCICE">Rhythm Exercice</string>
+    <string name="DATA_MANAGER">Data Manager</string>
+    <string name="PROVISOIRE_LOGO_APPLICATION">FUTUR_LOGO_LARGE</string>
+
     <!-- Texte Parametres-->
     <string name="Patient_Name">Patient name</string>
     <string name="Err_Patient_Name">pn</string>

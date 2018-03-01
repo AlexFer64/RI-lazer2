@@ -12,7 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.WindowManager;
-import android.widget.TextView;
+
 import android.widget.Toast;
 
 
