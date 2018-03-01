@@ -23,7 +23,7 @@
         <activity android:name=".StaticExerciceParameter"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeStaticExerciceParameter"
-            android:label="@string/STATIC_EXERCICE">
+            android:label="@string/Static_Exercice">
 
         </activity>
     </application>

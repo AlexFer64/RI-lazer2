@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -73,7 +74,7 @@ public class StaticExerciceParameter extends AppCompatActivity {
                 submitForm();
 
             }
-        });*/
+        });
     }
 
     //Getteur Setteur
@@ -83,14 +84,6 @@ public class StaticExerciceParameter extends AppCompatActivity {
     private void submitForm() {
         if (!validatePatientName()) { //si le nom du patient n'est pas valide
             return; //on valide pas le formulaire
-        }
-    }
-
-
-    public TextView get_errorText() {
-        return _errorText;
-        if (!validateOperatorName()) {
-            return;
         }
 
         if (!validateMarkDistance()) {
