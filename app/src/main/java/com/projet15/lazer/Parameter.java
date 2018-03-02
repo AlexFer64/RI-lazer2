@@ -1,5 +1,7 @@
 package com.projet15.lazer;
 
+import java.io.Serializable;
+
 /**
  * Created by alexandre on 28/02/2018.
  */
@@ -7,7 +9,7 @@ package com.projet15.lazer;
 /*
 * Sauvegarde les données du formulaire
 * */
-public class Parameter {
+public class Parameter implements Serializable{
     //Attributs
     private int _typeExercice; //a discuter
     private String _patientName;
@@ -36,6 +38,13 @@ public class Parameter {
         this._markDistance = _markDistance;
         this._time = _time;
         this._bipIntervale = -1; // A voir
+    }
+    public Parameter(Parameter p){
+        set_patientName(p.get_patientName());
+        set_operatorName(p.get_operatorName());
+        set_markDistance(p.get_markDistance());
+        set_time(p.get_time());
+        set_bipIntervale(p.get_bipIntervale());
     }
 
     //Getteur & Setteur
@@ -68,7 +77,7 @@ public class Parameter {
         return _markDistance;
     }
 
-    public void set_markDistance(int _markDistance) {
+    public void set_markDistance(float _markDistance) {
         this._markDistance = _markDistance;
     }
 

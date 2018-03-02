@@ -24,16 +24,17 @@
             android:name=".StaticExerciceParameter"
             android:label="@string/STATIC_EXERCICE"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeStaticExerciceParameter">
-
-        </activity>
+            android:theme="@style/AppThemeStaticExerciceParameter"/>
         <activity
             android:name=".RythmExerciceParameter"
             android:label="@string/RYTHM_EXERCICE"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeRythmExerciceParameter">
-
-        </activity>
+            android:theme="@style/AppThemeRythmExerciceParameter"/>
+        <activity android:name=".Camera"
+            android:label="@string/RYTHM_EXERCICE"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeCamera"
+            />
     </application>
 
 </manifest>

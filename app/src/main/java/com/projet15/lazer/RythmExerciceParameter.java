@@ -74,7 +74,7 @@ public class RythmExerciceParameter extends AppCompatActivity {
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                submitForm();
+                submitForm(view);
 
             }
         });
@@ -84,7 +84,7 @@ public class RythmExerciceParameter extends AppCompatActivity {
 
     //Méthode
     //Validation formulaire
-    private void submitForm() {
+    private void submitForm(View view) {
         if (!validatePatientName()) { //si le nom du patient n'est pas valide
             return; //on valide pas le formulaire
         }
@@ -101,13 +101,18 @@ public class RythmExerciceParameter extends AppCompatActivity {
             return;
         }
 
-        if (!validateBipInterval()){
-            return;
-        }
-
         //sinon on passe à la vue suivante (CODE A RAJOUTER)
+        Parameter parametreDeLexercice = new Parameter(2,
+                _patientName.getText().toString(),
+                _operatorName.getText().toString(),
+                Float.parseFloat(_markDistance.getText().toString()),
+                Integer.parseInt(_time.getText().toString()),
+                Integer.parseInt(_bipInterval.getText().toString()));
 
-        Toast.makeText(getApplicationContext(), "la vue suivante n'existe pas encore", Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(view.getContext(),Camera.class);
+        i.putExtra("parameters",parametreDeLexercice);
+        startActivity(i);
+        // Toast.makeText(getApplicationContext(), "la vue suivante n'existe pas encore", Toast.LENGTH_SHORT).show();
     }
 
     //validation PatientName
