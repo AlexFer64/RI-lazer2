@@ -22,9 +22,9 @@ public class StaticExerciceParameter extends AppCompatActivity {
     //Variables
     //Objet graphique
 
-    private Toolbar toolbar;
-    private EditText patientName, operatorName, markDistance, time;
-    private TextInputLayout layoutPatientName, layoutOperatorName, layoutMarkDistance, layoutTime;
+    private Toolbar _toolbar;
+    private EditText _patientName, _operatorName, _markDistance, _time;
+    private TextInputLayout _layoutPatientName, _layoutOperatorName, _layoutMarkDistance, _layoutTime;
     private Button buttonStart;
     //Parameter
     public Parameter parametreDeLexercice;
@@ -35,10 +35,10 @@ public class StaticExerciceParameter extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_static_exercice_parameter);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_action_back)); //mettre comme icône de naviguation ic_action_back (flêche)
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() { //mettre un listner à l'icone qui reviens au menu principal quand on clique dessus
+        _toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(_toolbar);
+        _toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_action_back)); //mettre comme icône de naviguation ic_action_back (flêche)
+        _toolbar.setNavigationOnClickListener(new View.OnClickListener() { //mettre un listner à l'icone qui reviens au menu principal quand on clique dessus
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(view.getContext(), MenuPrincipal.class);
@@ -48,25 +48,25 @@ public class StaticExerciceParameter extends AppCompatActivity {
 
 
         //textInputLayout
-        layoutPatientName = (TextInputLayout) findViewById(R.id.PATIENT_NAME_LAYOUT_ID);
-        layoutOperatorName = (TextInputLayout) findViewById(R.id.OPERATOR_NAME_LAYOUT_ID);
-        layoutMarkDistance = (TextInputLayout) findViewById(R.id.MARK_DISTANCE_LAYOUT_ID);
-        layoutTime = (TextInputLayout) findViewById(R.id.TIME_LAYOUT_ID);
+        _layoutPatientName = (TextInputLayout) findViewById(R.id.PATIENT_NAME_LAYOUT_ID);
+        _layoutOperatorName = (TextInputLayout) findViewById(R.id.OPERATOR_NAME_LAYOUT_ID);
+        _layoutMarkDistance = (TextInputLayout) findViewById(R.id.MARK_DISTANCE_LAYOUT_ID);
+        _layoutTime = (TextInputLayout) findViewById(R.id.TIME_LAYOUT_ID);
 
         //editText
-        patientName = (EditText) findViewById(R.id.PATIENT_NAME_EDITTEXT_ID);
-        operatorName = (EditText) findViewById(R.id.OPERATOR_NAME_EDITTEXT_ID);
-        markDistance = (EditText) findViewById(R.id.MARK_DISTANCE_EDITTEXT_ID);
-        time = (EditText) findViewById(R.id.TIME_EDITTEXT_ID);
+        _patientName = (EditText) findViewById(R.id.PATIENT_NAME_EDITTEXT_ID);
+        _operatorName = (EditText) findViewById(R.id.OPERATOR_NAME_EDITTEXT_ID);
+        _markDistance = (EditText) findViewById(R.id.MARK_DISTANCE_EDITTEXT_ID);
+        _time = (EditText) findViewById(R.id.TIME_EDITTEXT_ID);
 
         buttonStart = (Button) findViewById(R.id.START_BUTTON_ID);
 
 
         //set les listener
-        patientName.addTextChangedListener(new textChangedListener(patientName));
-        operatorName.addTextChangedListener(new textChangedListener(operatorName));
-        markDistance.addTextChangedListener(new textChangedListener(markDistance));
-        time.addTextChangedListener(new textChangedListener(time));
+        _patientName.addTextChangedListener(new textChangedListener(_patientName));
+        _operatorName.addTextChangedListener(new textChangedListener(_operatorName));
+        _markDistance.addTextChangedListener(new textChangedListener(_markDistance));
+        _time.addTextChangedListener(new textChangedListener(_time));
 
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +85,9 @@ public class StaticExerciceParameter extends AppCompatActivity {
         if (!validatePatientName()) { //si le nom du patient n'est pas valide
             return; //on valide pas le formulaire
         }
+        if(!validateOperatorName()){
+            return;
+        }
 
         if (!validateMarkDistance()) {
             return;
@@ -102,48 +105,48 @@ public class StaticExerciceParameter extends AppCompatActivity {
     //validation PatientName
     private boolean validatePatientName() {
         //trim() enlève les espaces
-        if (patientName.getText().toString().trim().isEmpty()) { //si le nom du patient est vide
-            layoutPatientName.setError(getString(R.string.Err_Patient_Name)); //on met en message d'erreur Err_Patient_Name
-            requestFocus(patientName);
+        if (_patientName.getText().toString().trim().isEmpty()) { //si le nom du patient est vide
+            _layoutPatientName.setError(getString(R.string.Err_Patient_Name)); //on met en message d'erreur Err_Patient_Name
+            requestFocus(_patientName);
             return false; //est on return false (nom non-validé)
         } else {
-            layoutPatientName.setErrorEnabled(false); //sinon le patientName est valide donc si le patientName a déjà été validé on enlève le message d'erreur
+            _layoutPatientName.setErrorEnabled(false); //sinon le patientName est valide donc si le patientName a déjà été validé on enlève le message d'erreur
         }
 
         return true; //et on retourne true(nom validé)
     }
 
     private boolean validateOperatorName() {
-        if (operatorName.getText().toString().trim().isEmpty()) {
-            layoutOperatorName.setError(getString(R.string.Err_Operator_Name));
-            requestFocus(operatorName);
+        if (_operatorName.getText().toString().trim().isEmpty()) {
+            _layoutOperatorName.setError(getString(R.string.Err_Operator_Name));
+            requestFocus(_operatorName);
             return false;
         } else {
-            layoutOperatorName.setErrorEnabled(false);
+            _layoutOperatorName.setErrorEnabled(false);
         }
 
         return true;
     }
 
     private boolean validateMarkDistance() {
-        if (markDistance.getText().toString().trim().isEmpty()) {
-            layoutMarkDistance.setError(getString(R.string.Err_Mark_Distance));
-            requestFocus(markDistance);
+        if (_markDistance.getText().toString().trim().isEmpty()) {
+            _layoutMarkDistance.setError(getString(R.string.Err_Mark_Distance));
+            requestFocus(_markDistance);
             return false;
         } else {
-            layoutMarkDistance.setErrorEnabled(false);
+            _layoutMarkDistance.setErrorEnabled(false);
         }
 
         return true;
     }
 
     private boolean validateTime() {
-        if (time.getText().toString().trim().isEmpty()) {
-            layoutTime.setError(getString(R.string.Err_Time));
-            requestFocus(time);
+        if (_time.getText().toString().trim().isEmpty()) {
+            _layoutTime.setError(getString(R.string.Err_Time));
+            requestFocus(_time);
             return false;
         } else {
-            layoutTime.setErrorEnabled(false);
+            _layoutTime.setErrorEnabled(false);
         }
 
         return true;
