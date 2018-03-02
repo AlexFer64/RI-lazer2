@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MenuPrincipal extends  AppCompatActivity{
 
@@ -47,6 +48,21 @@ public class MenuPrincipal extends  AppCompatActivity{
             public void onClick(View view) {
                 Intent i = new Intent(view.getContext(), StaticExerciceParameter.class); //association de l'activité principale et de l'activité exercice statique parameter
                 startActivity(i); //lancement de l'activitéexercice statique parameter
+            }
+        });
+
+        get_rythmButton().setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(view.getContext(), RythmExerciceParameter.class);
+                startActivity(i);
+            }
+        });
+
+        get_managerButton().setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "la vue suivante n'existe pas encore", Toast.LENGTH_SHORT).show();
             }
         });
     }

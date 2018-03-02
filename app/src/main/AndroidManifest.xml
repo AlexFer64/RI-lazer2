@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.projet15.lazer">
 
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -10,7 +10,8 @@
         android:label="@string/APP_NAME"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
-        <activity android:name=".MenuPrincipal"
+        <activity
+            android:name=".MenuPrincipal"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeMenuPrincipal">
             <intent-filter>
@@ -19,11 +20,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".StaticExerciceParameter"
+        <activity
+            android:name=".StaticExerciceParameter"
+            android:label="@string/STATIC_EXERCICE"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeStaticExerciceParameter"
-            android:label="@string/STATIC_EXERCICE">
+            android:theme="@style/AppThemeStaticExerciceParameter">
+
+        </activity>
+        <activity
+            android:name=".RythmExerciceParameter"
+            android:label="@string/RYTHM_EXERCICE"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeRythmExerciceParameter">
 
         </activity>
     </application>

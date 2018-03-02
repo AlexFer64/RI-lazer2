@@ -8,13 +8,15 @@
 
     <!-- Texte Parametres-->
     <string name="Patient_Name">Patient name</string>
-    <string name="Err_Patient_Name">pn</string>
+    <string name="Err_Patient_Name">You haven\'t fill Patient name</string>
     <string name="Operator_Name">Operator name</string>
-    <string name="Err_Operator_Name">on</string>
+    <string name="Err_Operator_Name">You haven`\'t fill Operator name</string>
     <string name="Mark_Distance">Mark distance (cm) </string>
-    <string name="Err_Mark_Distance">md</string>
+    <string name="Err_Mark_Distance">You haven\'t fill Mark distance</string>
     <string name="Time">Time (s)</string>
-    <string name="Err_Time">t</string>
+    <string name="Err_Time">You haven\'t fill Time</string>
+    <string name="Bip_Interval">Bip Interval (s)</string>
+    <string name="Err_Bip_Interval">You haven\'t fill Bip Interval</string>
     <string name="Final_Bip">Final Bip</string>
     <string name="Start_Button">START</string>
 

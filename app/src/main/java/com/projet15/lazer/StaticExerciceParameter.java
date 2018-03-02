@@ -48,18 +48,18 @@ public class StaticExerciceParameter extends AppCompatActivity {
 
 
         //textInputLayout
-        _layoutPatientName = (TextInputLayout) findViewById(R.id.PATIENT_NAME_LAYOUT_ID);
-        _layoutOperatorName = (TextInputLayout) findViewById(R.id.OPERATOR_NAME_LAYOUT_ID);
-        _layoutMarkDistance = (TextInputLayout) findViewById(R.id.MARK_DISTANCE_LAYOUT_ID);
-        _layoutTime = (TextInputLayout) findViewById(R.id.TIME_LAYOUT_ID);
+        _layoutPatientName = (TextInputLayout) findViewById(R.id.STATIC_PATIENT_NAME_LAYOUT_ID);
+        _layoutOperatorName = (TextInputLayout) findViewById(R.id.STATIC_OPERATOR_NAME_LAYOUT_ID);
+        _layoutMarkDistance = (TextInputLayout) findViewById(R.id.STATIC_MARK_DISTANCE_LAYOUT_ID);
+        _layoutTime = (TextInputLayout) findViewById(R.id.STATIC_TIME_LAYOUT_ID);
 
         //editText
-        _patientName = (EditText) findViewById(R.id.PATIENT_NAME_EDITTEXT_ID);
-        _operatorName = (EditText) findViewById(R.id.OPERATOR_NAME_EDITTEXT_ID);
-        _markDistance = (EditText) findViewById(R.id.MARK_DISTANCE_EDITTEXT_ID);
-        _time = (EditText) findViewById(R.id.TIME_EDITTEXT_ID);
+        _patientName = (EditText) findViewById(R.id.STATIC_PATIENT_NAME_EDITTEXT_ID);
+        _operatorName = (EditText) findViewById(R.id.STATIC_OPERATOR_NAME_EDITTEXT_ID);
+        _markDistance = (EditText) findViewById(R.id.STATIC_MARK_DISTANCE_EDITTEXT_ID);
+        _time = (EditText) findViewById(R.id.STATIC_TIME_EDITTEXT_ID);
 
-        buttonStart = (Button) findViewById(R.id.START_BUTTON_ID);
+        buttonStart = (Button) findViewById(R.id.STATIC_START_BUTTON_ID);
 
 
         //set les listener
@@ -85,6 +85,7 @@ public class StaticExerciceParameter extends AppCompatActivity {
         if (!validatePatientName()) { //si le nom du patient n'est pas valide
             return; //on valide pas le formulaire
         }
+
         if(!validateOperatorName()){
             return;
         }
@@ -177,16 +178,16 @@ public class StaticExerciceParameter extends AppCompatActivity {
 
         public void afterTextChanged(Editable editable){ //après qu'on est changé le texte d'un champ, on attend pas la validation pour vérifer que c'est nom vide: pour pouvoir supprimer les messsages d'erreur dès qu'on entre quelque chose
             switch (view.getId()) {
-                case R.id.PATIENT_NAME_EDITTEXT_ID:
+                case R.id.STATIC_PATIENT_NAME_EDITTEXT_ID:
                     validatePatientName();
                     break;
-                case R.id.OPERATOR_NAME_EDITTEXT_ID:
+                case R.id.STATIC_OPERATOR_NAME_EDITTEXT_ID:
                     validateOperatorName();
                     break;
-                case R.id.MARK_DISTANCE_EDITTEXT_ID:
+                case R.id.STATIC_MARK_DISTANCE_EDITTEXT_ID:
                     validateMarkDistance();
                     break;
-                case R.id.TIME_EDITTEXT_ID:
+                case R.id.STATIC_TIME_EDITTEXT_ID:
                     validateTime();
                     break;
             }
