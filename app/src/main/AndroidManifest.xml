@@ -30,9 +30,9 @@
             android:label="@string/RYTHM_EXERCICE"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeRythmExerciceParameter"/>
-        <activity android:name=".Camera"
-            android:label="@string/RYTHM_EXERCICE"
-            android:screenOrientation="portrait"
+        <activity android:name=".CameraActivity"
+            android:label="@string/CAMERA"
+            android:screenOrientation="landscape"
             android:theme="@style/AppThemeCamera"
             />
     </application>

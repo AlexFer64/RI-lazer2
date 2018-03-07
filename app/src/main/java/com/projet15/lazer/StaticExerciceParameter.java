@@ -2,6 +2,8 @@ package com.projet15.lazer;
 
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.hardware.Camera;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.transition.Fade;
@@ -119,9 +121,16 @@ public class StaticExerciceParameter extends AppCompatActivity {
                 Float.parseFloat(_markDistance.getText().toString()),
                 Integer.parseInt(_time.getText().toString()));
 
-        Intent i = new Intent(view.getContext(),Camera.class);
-        i.putExtra("parameters",parametreDeLexercice);
-        startActivity(i);
+        if (getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)){
+            // this device has a camera
+            Intent i = new Intent(view.getContext(),Camera.class);
+            i.putExtra("parameters",parametreDeLexercice);
+            startActivity(i);
+        } else {
+            // no camera on this device
+            Toast.makeText(getApplicationContext(),"Votre appareil n'a pas de caméra", Toast.LENGTH_SHORT).show();
+        }
+
        // Toast.makeText(getApplicationContext(), "la vue suivante n'existe pas encore", Toast.LENGTH_SHORT).show();
     }
 
