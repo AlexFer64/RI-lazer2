@@ -123,7 +123,7 @@ public class StaticExerciceParameter extends AppCompatActivity {
 
         if (getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)){
             // this device has a camera
-            Intent i = new Intent(view.getContext(),Camera.class);
+            Intent i = new Intent(view.getContext(),CameraActivity.class);
             i.putExtra("parameters",parametreDeLexercice);
             startActivity(i);
         } else {

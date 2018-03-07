@@ -2,9 +2,6 @@ package com.projet15.lazer;
 
 import java.io.Serializable;
 
-/**
- * Created by alexandre on 28/02/2018.
- */
 
 /*
 * Sauvegarde les données du formulaire
