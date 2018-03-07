@@ -4,6 +4,7 @@ package com.projet15.lazer;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.transition.Fade;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -61,6 +62,8 @@ public class StaticExerciceParameter extends AppCompatActivity {
 
         buttonStart = (Button) findViewById(R.id.STATIC_START_BUTTON_ID);
 
+        //animations
+        setupWindowAnimations();
 
         //set les listener
         _patientName.addTextChangedListener(new textChangedListener(_patientName));
@@ -77,11 +80,20 @@ public class StaticExerciceParameter extends AppCompatActivity {
 
             }
         });
+
+
     }
 
     //Getteur Setteur
 
     //Méthode
+    private void setupWindowAnimations() {
+        Fade fade = new Fade();
+        fade.setDuration(1000);
+        getWindow().setEnterTransition(fade);
+    }
+
+
     //Validation formulaire
     private void submitForm(View view) {
         if (!validatePatientName()) { //si le nom du patient n'est pas valide

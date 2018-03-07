@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.projet15.lazer.MenuPrincipal">
+    tools:context="com.projet15.lazer.MenuPrincipal"
+    android:animateLayoutChanges="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,13 +16,20 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="10">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/TAILLE_TEXTE_BOUTON"
-                android:textStyle="bold"
-                android:text="@string/PROVISOIRE_LOGO_APPLICATION"
-                android:layout_gravity="center"/>
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_marginTop="@dimen/MARGIN_TOP_BUTTON"
+                android:layout_marginBottom="@dimen/MARGIN_BOTTOM_LOGO"
+                android:layout_marginStart="@dimen/MARGIN_LEFT_LOGO"
+                android:layout_marginLeft="@dimen/MARGIN_LEFT_LOGO"
+                android:layout_marginEnd="@dimen/MARGIN_RIGHT_LOGO"
+                android:layout_marginRight="@dimen/MARGIN_RIGHT_LOGO"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="top|center_horizontal"
+                android:adjustViewBounds="true"
+                android:src="@drawable/logo_large" />
         </FrameLayout>
         <FrameLayout
             android:layout_width="match_parent"
@@ -38,7 +46,7 @@
                 android:layout_marginLeft="@dimen/MARGIN_LEFT_BUTTON"
                 android:layout_marginEnd="@dimen/MARGIN_RIGHT_BUTTON"
                 android:layout_marginRight="@dimen/MARGIN_RIGHT_BUTTON"
-                android:background="@color/ROUGE_CHARTE_GRAPHIQUE"
+                android:theme="@style/BoutonMenuPrincipal"
                 android:textAllCaps="false"
                 android:textSize="@dimen/TAILLE_TEXTE_BOUTON"
                 android:text="@string/STATIC_EXERCICE" />
@@ -60,7 +68,7 @@
                 android:layout_marginLeft="@dimen/MARGIN_LEFT_BUTTON"
                 android:layout_marginEnd="@dimen/MARGIN_RIGHT_BUTTON"
                 android:layout_marginRight="@dimen/MARGIN_RIGHT_BUTTON"
-                android:background="@color/ROUGE_CHARTE_GRAPHIQUE"
+                android:theme="@style/BoutonMenuPrincipal"
                 android:textSize="@dimen/TAILLE_TEXTE_BOUTON"
                 android:textAllCaps="false"
                 android:text="@string/RYTHM_EXERCICE" />
@@ -81,7 +89,7 @@
                 android:layout_marginLeft="@dimen/MARGIN_LEFT_BUTTON"
                 android:layout_marginEnd="@dimen/MARGIN_RIGHT_BUTTON"
                 android:layout_marginRight="@dimen/MARGIN_RIGHT_BUTTON"
-                android:background="@color/ROUGE_CHARTE_GRAPHIQUE"
+                android:theme="@style/BoutonMenuPrincipal"
                 android:textSize="@dimen/TAILLE_TEXTE_BOUTON"
                 android:textAllCaps="false"
                 android:text="@string/DATA_MANAGER" />
