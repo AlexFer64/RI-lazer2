@@ -10,8 +10,8 @@
         <item name="android:windowActionBar">false</item> <!-- si true laisse une barre en haut avec marqué le titre si NoTitle=false -->
 
         <!-- transitions -->
-        <item name="android:windowExitTransition">@transition/main_exit</item>
-        <item name="android:windowReenterTransition">@transition/main_reenter</item>
+       <!-- <item name="android:windowExitTransition">@transition/main_exit</item>
+        <item name="android:windowReenterTransition">@transition/main_reenter</item>-->
 
 
     </style>
@@ -24,9 +24,9 @@
         <item name="android:windowActionBar">false</item> <!-- si true laisse une barre en haut avec marqué le titre si NoTitle=false -->
 
         <!-- transitions -->
-        <item name="android:windowTranslucentStatus">true</item>
+        <!--<item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowAllowEnterTransitionOverlap">true</item>
-        <item name="android:windowEnterTransition">@transition/detail_enter</item>
+        <item name="android:windowEnterTransition">@transition/detail_enter</item>-->
 
     </style>
 

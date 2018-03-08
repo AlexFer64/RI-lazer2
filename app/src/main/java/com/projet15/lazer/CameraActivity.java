@@ -7,17 +7,33 @@ import android.graphics.ImageFormat;
 import android.graphics.Rect;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+<<<<<<< Updated upstream
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+=======
+import android.view.View;
+>>>>>>> Stashed changes
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import 	android.hardware.Camera;
 
+<<<<<<< Updated upstream
 import java.util.ArrayList;
+=======
+import org.opencv.android.OpenCVLoader;
+import org.opencv.android.Camera2Renderer;
+import org.opencv.core.Mat;
+import org.opencv.videoio.VideoCapture;
+import org.opencv.imgcodecs.Imgcodecs;
+import org.opencv.videoio.Videoio;
+
+>>>>>>> Stashed changes
 import java.util.List;
+import java.util.Optional;
 
 
 //TODO:récuperer les marqueurs
@@ -33,9 +49,17 @@ public class CameraActivity extends AppCompatActivity {
     private Parameter _parametreDeLexercice;
     private TextView _callBack;
     private Camera _camera;
+<<<<<<< Updated upstream
     private CameraPreviewPixel _preview;
     //private Button _button;
     private FrameLayout displayColor;
+=======
+    private CameraPreview _preview;
+    private Button _button;
+    private VideoCapture cap;
+    private Mat matrice;
+    private Imgcodecs im;
+>>>>>>> Stashed changes
 
     //Cycle de Vie de l'application
     @Override
@@ -77,6 +101,16 @@ public class CameraActivity extends AppCompatActivity {
         _preview = new CameraPreviewPixel(this, _camera);
         FrameLayout preview = (FrameLayout) findViewById(R.id.CAMERA_FRAME_LAYOUT_ID);
         preview.addView(_preview);
+
+
+
+        _button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                _callBack.setText("oui");
+
+            }
+        });
 
 
     }
