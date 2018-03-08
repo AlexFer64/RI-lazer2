@@ -84,6 +84,7 @@ public class MenuPrincipal extends  AppCompatActivity{
         get_managerButton().setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                //TODO:lié l'activité DataMangerActivity
                 Toast.makeText(getApplicationContext(), "la vue suivante n'existe pas encore", Toast.LENGTH_SHORT).show();
             }
         });

@@ -19,6 +19,15 @@ import 	android.hardware.Camera;
 import java.util.ArrayList;
 import java.util.List;
 
+
+//TODO:récuperer les marqueurs
+//TODO:récupéré les coordonnées du laser en fonction du temps et les enregistrer dans un variables "list<>"par exemple ou un tableau
+//TODO: gerer le temps de l'exercice
+//TODO:tracker le laser sur l'écran
+//TODO:Emetre des bip à intervalle régulier
+//TODO:sauvegarder les coordonnées dans un fichier csv
+//TODO:Géré les different scénario d'erreurs (voir maquettes et scénario)
+
 public class CameraActivity extends AppCompatActivity {
     private Intent _intent;
     private Parameter _parametreDeLexercice;
@@ -28,6 +37,7 @@ public class CameraActivity extends AppCompatActivity {
     //private Button _button;
     private FrameLayout displayColor;
 
+    //Cycle de Vie de l'application
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +79,37 @@ public class CameraActivity extends AppCompatActivity {
         preview.addView(_preview);
 
 
+    }
+
+    //quand l'activité passe en arrière plan
+    @Override
+    protected void onPause() {
+
+        super.onPause();
+
+        //TODO:Sauvegarder l'instance de l'appli
+        //TODO:stoper la préview
+        //TODO:Eteindre  la camera
+
+        _camera.release();
+
+    }
+    //reprise de l'activité en cour
+    @Override
+    protected void onResume() {
+
+        super.onResume();
+        //TODO:Reprendre l'activité là où elle en était
+        _camera.open();
+    }
+    //arret de l'activité
+    @Override
+    protected void onStop() {
+
+        super.onStop();
+        //TODO:Eteindre  la camera
+        _camera.release();
+        //TODO:stoper la préview
     }
 
 
