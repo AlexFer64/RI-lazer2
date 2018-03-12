@@ -82,7 +82,7 @@ public class CameraActivity extends AppCompatActivity {
     }
 
     //quand l'activité passe en arrière plan
-    @Override
+   /* @Override
     protected void onPause() {
 
         super.onPause();
@@ -111,7 +111,7 @@ public class CameraActivity extends AppCompatActivity {
         _camera.release();
         //TODO:stoper la préview
     }
-
+*/
 
     public static Camera getCameraInstance(){
         Camera c = null;
@@ -130,6 +130,10 @@ public class CameraActivity extends AppCompatActivity {
      *      |               TEST CAMERA PREVIEW AMELIOREE                              |
      *      |                                                                          |
      *      ----------------------------------------------------------------------------*/
+    //variable pour conversion:
+    int rTmp=0;
+    int gTmp=0;
+    int bTmp=0;
 
     public class CameraPreviewPixel extends CameraPreview implements SurfaceHolder.Callback, Camera.PreviewCallback {
         private SurfaceHolder mHolder;
@@ -149,18 +153,43 @@ public class CameraActivity extends AppCompatActivity {
 
         public void onPreviewFrame(byte[] data, Camera camera) {
             parameters = camera.getParameters();
-            //transformer les pixels du formats NV21 au format RGB
-            //decodePixels(pixels, data, previewSize.width, previewSize.height);
-            //decodePixels(pixels, data, parameters.getPreviewSize().width , parameters.getPreviewSize().height);
 
-            //mettre à droite la couleur du pixel le plus en haut à droite
+            _callBack.setText(String.valueOf((int) data[6]));
 
-            //displayColor.setBackgroundColor(pixels[0]);
-            _callBack.setText("format: " + parameters.getPreviewFormat());
-            //test logcat
-            String TAG = "aaaaaaaaaaaaaaaaaaaaaaa";
-            Log.v(TAG, "visiblement c'est un peu capilotracté");
-            //Log.i("Pixels", "The top right pixel has the following RGB (hexadecimal) values:" +Integer.toHexString(pixels[0]));
+            int width = parameters.getPreviewSize().width;
+            int height = parameters.getPreviewSize().height;
+            final int frameSize = width * height;
+            YUVTOPIXELRGB(data[0],data[frameSize],data[frameSize+2]);
+
+            displayColor.setBackgroundColor(Color.rgb(rTmp,gTmp,bTmp));
+
+
+            //Log.e("pixel en haut à gauche:","");
+            //Log.e("Rouge: ", Integer.toString(rTmp));
+            //Log.e("Vert :", Integer.toString(gTmp));
+            //Log.e("Bleu :", Integer.toString(bTmp));
+
         }
+    }
+
+    void YUVTOPIXELRGB(byte yValue, byte uValue, byte vValue)
+    {
+        rTmp = (int)((float)(yValue) + (1.370705 * ((float)(vValue) - 128)));
+        gTmp = (int)((float)(yValue) - (0.698001 * ((float)(vValue) - 128)) - (0.337633 * ((float)(uValue) - 128)));
+        bTmp = (int)((float)(yValue) + (1.732446 * ((float)(uValue) - 128)));
+        rTmp = clamp(rTmp, 0, 255);
+        gTmp = clamp(gTmp, 0, 255);
+        bTmp = clamp(bTmp, 0, 255);
+    }
+
+    int clamp(int x, int min, int max)
+    {
+        if(x<min){
+            x=min;
+        }
+        else if(x>max){
+            x=max;
+        }
+        return x;
     }
 }
