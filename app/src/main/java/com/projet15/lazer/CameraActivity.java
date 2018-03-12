@@ -153,15 +153,16 @@ public class CameraActivity extends AppCompatActivity {
 
         public void onPreviewFrame(byte[] data, Camera camera) {
             parameters = camera.getParameters();
-
             _callBack.setText(String.valueOf((int) data[6]));
 
             int width = parameters.getPreviewSize().width;
             int height = parameters.getPreviewSize().height;
-            final int frameSize = width * height;
-            YUVTOPIXELRGB(data[0],data[frameSize],data[frameSize+2]);
+            YuvToRgb test = new YuvToRgb(data,width,height);
+            int [] tab;
 
-            displayColor.setBackgroundColor(Color.rgb(rTmp,gTmp,bTmp));
+            tab = test.decode() ;
+
+            displayColor.setBackgroundColor(tab[1]);
 
 
             //Log.e("pixel en haut à gauche:","");
