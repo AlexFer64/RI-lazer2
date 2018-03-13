@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,8 +45,10 @@ public class RythmExerciceParameter extends AppCompatActivity {
         _toolbar.setNavigationOnClickListener(new View.OnClickListener() { //mettre un listner à l'icone qui reviens au menu principal quand on clique dessus
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(view.getContext(), MenuPrincipal.class);
-                startActivity(i); //lancement de l'activité menu principal
+               // Log.e("finish","FINISH");
+                //inish();
+                //  Intent i = new Intent(view.getContext(), MenuPrincipal.class);
+                //startActivity(i); //lancement de l'activité menu principal
             }
         });
 

@@ -81,38 +81,23 @@ public class CameraActivity extends AppCompatActivity {
 
     }
 
-    //quand l'activité passe en arrière plan
-   /* @Override
-    protected void onPause() {
-
+    @Override
+    public void onPause() {
+       Log.e("onpause","L'activité est en pause");
         super.onPause();
-
-        //TODO:Sauvegarder l'instance de l'appli
-        //TODO:stoper la préview
-        //TODO:Eteindre  la camera
-
-        _camera.release();
-
+        // Stop camera access
+       releaseCamera();
     }
-    //reprise de l'activité en cour
-    @Override
-    protected void onResume() {
 
+    @Override
+    public void onResume(){
         super.onResume();
-        //TODO:Reprendre l'activité là où elle en était
-        _camera.open();
-    }
-    //arret de l'activité
-    @Override
-    protected void onStop() {
+        _camera = getCameraInstance();
+        _preview = new CameraPreviewPixel(this, _camera);
+        FrameLayout preview = (FrameLayout) findViewById(R.id.CAMERA_FRAME_LAYOUT_ID);
+        preview.addView(_preview);
 
-        super.onStop();
-        //TODO:Eteindre  la camera
-        _camera.release();
-        //TODO:stoper la préview
     }
-*/
-
     public static Camera getCameraInstance(){
         Camera c = null;
         try {
@@ -123,6 +108,12 @@ public class CameraActivity extends AppCompatActivity {
         }
         return c; // returns null if camera is unavailable
     }
+    private void releaseCamera() {
+        if (_camera != null) {
+            _camera.release();        // release the camera for other applications
+            _camera = null;
+        }
+    }
 
 
     /**     ----------------------------------------------------------------------------
@@ -130,10 +121,7 @@ public class CameraActivity extends AppCompatActivity {
      *      |               TEST CAMERA PREVIEW AMELIOREE                              |
      *      |                                                                          |
      *      ----------------------------------------------------------------------------*/
-    //variable pour conversion:
-    int rTmp=0;
-    int gTmp=0;
-    int bTmp=0;
+
 
     public class CameraPreviewPixel extends CameraPreview implements SurfaceHolder.Callback, Camera.PreviewCallback {
         private SurfaceHolder mHolder;
@@ -173,24 +161,5 @@ public class CameraActivity extends AppCompatActivity {
         }
     }
 
-    void YUVTOPIXELRGB(byte yValue, byte uValue, byte vValue)
-    {
-        rTmp = (int)((float)(yValue) + (1.370705 * ((float)(vValue) - 128)));
-        gTmp = (int)((float)(yValue) - (0.698001 * ((float)(vValue) - 128)) - (0.337633 * ((float)(uValue) - 128)));
-        bTmp = (int)((float)(yValue) + (1.732446 * ((float)(uValue) - 128)));
-        rTmp = clamp(rTmp, 0, 255);
-        gTmp = clamp(gTmp, 0, 255);
-        bTmp = clamp(bTmp, 0, 255);
-    }
 
-    int clamp(int x, int min, int max)
-    {
-        if(x<min){
-            x=min;
-        }
-        else if(x>max){
-            x=max;
-        }
-        return x;
-    }
 }
