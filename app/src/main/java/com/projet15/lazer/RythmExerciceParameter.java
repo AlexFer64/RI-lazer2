@@ -45,10 +45,9 @@ public class RythmExerciceParameter extends AppCompatActivity {
         _toolbar.setNavigationOnClickListener(new View.OnClickListener() { //mettre un listner à l'icone qui reviens au menu principal quand on clique dessus
             @Override
             public void onClick(View view) {
-               // Log.e("finish","FINISH");
-                //inish();
-                //  Intent i = new Intent(view.getContext(), MenuPrincipal.class);
-                //startActivity(i); //lancement de l'activité menu principal
+               
+                finish();
+
             }
         });
 

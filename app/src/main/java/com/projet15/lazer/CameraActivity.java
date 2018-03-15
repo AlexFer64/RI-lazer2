@@ -69,7 +69,7 @@ public class CameraActivity extends AppCompatActivity {
             Camera.Parameters ParametreCamera = _camera.getParameters(); //récuperer les paramètres de la caméra
             ParametreCamera.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO); //rajouter le mode autofocus
             //ParametreCamera.setPictureFormat(ImageFormat.FLEX_RGB_888);
-
+            ParametreCamera.setPreviewSize(640,480);
             _camera.setParameters(ParametreCamera); //réattribuer les nouveaux paramètres à la caméra
         }
 
@@ -87,6 +87,7 @@ public class CameraActivity extends AppCompatActivity {
         super.onPause();
         // Stop camera access
        releaseCamera();
+       finish();
     }
 
     @Override
