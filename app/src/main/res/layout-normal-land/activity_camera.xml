@@ -11,16 +11,31 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         >
+
         <FrameLayout
-            android:id="@+id/CAMERA_FRAME_LAYOUT_ID"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="1"
+            android:layout_weight="1">
+        <FrameLayout
+                android:id="@+id/CAMERA_FRAME_LAYOUT_ID"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             />
+
+        </FrameLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:orientation="vertical">
+
 
             <TextView
                 android:id="@+id/CALLBACK_TEXT_VIEW_ID"
@@ -30,12 +45,17 @@
                 android:textStyle="bold"
                 android:textColor="#000000"/>
 
+
             <FrameLayout
                 android:id="@+id/FRAME_LAYOUT_COLOR_ID"
                 android:layout_width="100dip"
                 android:layout_height="match_parent">
 
+
             </FrameLayout>
+            <!--<com.projet15.lazer.MyView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"/>-->
         </LinearLayout>
 
     </LinearLayout>

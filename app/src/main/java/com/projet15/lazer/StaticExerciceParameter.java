@@ -44,7 +44,7 @@ public class StaticExerciceParameter extends AppCompatActivity {
         _toolbar.setNavigationOnClickListener(new View.OnClickListener() { //mettre un listner à l'icone qui reviens au menu principal quand on clique dessus
             @Override
             public void onClick(View view) {
-            finish();  //termine l'activité pour retourné au menu principal
+           finish();  //termine l'activité pour retourné au menu principal
             }
         });
 
