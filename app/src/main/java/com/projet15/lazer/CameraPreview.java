@@ -59,7 +59,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     }
 
     public void surfaceDestroyed(SurfaceHolder holder) {
-      mCamera.stopPreview();
+
     }
 
     public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
@@ -93,6 +93,6 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         //Log.i("Pixels", "The top right pixel has the following RGB (hexadecimal) values:" +Integer.toHexString(pixels[0]));
     }
 
-    //decodePIxels
+
 
 }

@@ -90,15 +90,7 @@ public class CameraActivity extends AppCompatActivity {
        finish();
     }
 
-    @Override
-    public void onResume(){
-        super.onResume();
-        _camera = getCameraInstance();
-        _preview = new CameraPreviewPixel(this, _camera);
-        FrameLayout preview = (FrameLayout) findViewById(R.id.CAMERA_FRAME_LAYOUT_ID);
-        preview.addView(_preview);
 
-    }
     public static Camera getCameraInstance(){
         Camera c = null;
         try {
@@ -110,9 +102,17 @@ public class CameraActivity extends AppCompatActivity {
         return c; // returns null if camera is unavailable
     }
     private void releaseCamera() {
+        _preview.mCamera = null;
+        Log.i("releaseCamera"," previewCamera = null");
         if (_camera != null) {
+            //_preview.surfaceDestroyed(_preview.mHolder);
+            Log.i("releaseCamera"," if");
+            _camera.stopPreview();
+            Log.i("releaseCamera"," previewStop");
             _camera.release();        // release the camera for other applications
+            Log.i("releaseCamera"," cameraRelease");
             _camera = null;
+            Log.i("releaseCamera"," camera = null");
         }
     }
 
@@ -125,7 +125,7 @@ public class CameraActivity extends AppCompatActivity {
 
 
     public class CameraPreviewPixel extends CameraPreview implements SurfaceHolder.Callback, Camera.PreviewCallback {
-        private SurfaceHolder mHolder;
+     private SurfaceHolder mHolder;
         private Camera mCamera;
 
         //Settings de la caméra
@@ -153,12 +153,15 @@ public class CameraActivity extends AppCompatActivity {
 
             displayColor.setBackgroundColor(tab[1]);
 
+        }
 
-            //Log.e("pixel en haut à gauche:","");
-            //Log.e("Rouge: ", Integer.toString(rTmp));
-            //Log.e("Vert :", Integer.toString(gTmp));
-            //Log.e("Bleu :", Integer.toString(bTmp));
-
+        @Override
+        public void  surfaceDestroyed(SurfaceHolder holder){
+            //  mCamera.stopPreview();
+            if (mCamera != null) {
+                // Call stopPreview() to stop updating the preview surface.
+                mCamera.stopPreview();
+            }
         }
     }
 
