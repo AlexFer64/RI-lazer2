@@ -142,8 +142,6 @@ public class CameraActivity extends AppCompatActivity {
     public void onPause() {
         Log.e("onpause","L'activité est en pause");
         super.onPause();
-        // Stop camera access
-        releaseCamera();
         finish();
     }
 
@@ -160,16 +158,11 @@ public class CameraActivity extends AppCompatActivity {
     }
     private void releaseCamera() {
         _preview.mCamera = null;
-        Log.i("releaseCamera"," previewCamera = null");
         if (_camera != null) {
-            //_preview.surfaceDestroyed(_preview.mHolder);
-            Log.i("releaseCamera"," if");
             _camera.stopPreview();
-            Log.i("releaseCamera"," previewStop");
             _camera.release();        // release the camera for other applications
-            Log.i("releaseCamera"," cameraRelease");
             _camera = null;
-            Log.i("releaseCamera"," camera = null");
+
         }
     }
 
@@ -214,11 +207,7 @@ public class CameraActivity extends AppCompatActivity {
 
         @Override
         public void  surfaceDestroyed(SurfaceHolder holder){
-            //  mCamera.stopPreview();
-            if (mCamera != null) {
-                // Call stopPreview() to stop updating the preview surface.
-                mCamera.stopPreview();
-            }
+
         }
     }
 
