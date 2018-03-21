@@ -34,13 +34,15 @@ import java.util.List;
 import java.util.Optional;
 
 
-//TODO:récuperer les marqueurs
-//TODO:récupéré les coordonnées du laser en fonction du temps et les enregistrer dans un variables "list<>"par exemple ou un tableau
+//TODO:dessiner trois carré pour y placé les marqueur
+//TODO:récupérer les coordonnées du laser en fonction du temps et les enregistrer dans un variables "list<>"par exemple ou un tableau
+//TODO:Gérer le type d'exo
 //TODO: gerer le temps de l'exercice
 //TODO:tracker le laser sur l'écran
 //TODO:Emetre des bip à intervalle régulier
 //TODO:sauvegarder les coordonnées dans un fichier csv
-//TODO:Géré les different scénario d'erreurs (voir maquettes et scénario)
+//TODO:Gerer les Threads
+//TODO:Gérer les different scénario d'erreurs (voir maquettes et scénario)
 
 public class CameraActivity extends AppCompatActivity {
     private Intent _intent;
@@ -50,8 +52,8 @@ public class CameraActivity extends AppCompatActivity {
 
     private CameraPreviewPixel _preview;
 
-    private FrameLayout displayColor;
-    private ImageView mImageView;
+    private FrameLayout _displayColor;
+    private ImageView _imageView;
 
 
 
@@ -64,19 +66,16 @@ public class CameraActivity extends AppCompatActivity {
         setContentView(R.layout.activity_camera);
 
 
-        String TAG = "aaaaaaaaaaaaaaaaaaaaaaa";
-        Log.v(TAG, "index");
-
         //Recupération des données du formulaire
         _intent = getIntent();
         _parametreDeLexercice = (Parameter) _intent.getSerializableExtra("parameters");
 
         //Récupération du bouton et du texte
         _callBack = (TextView) findViewById(R.id.CALLBACK_TEXT_VIEW_ID);
-        displayColor = (FrameLayout) findViewById(R.id.FRAME_LAYOUT_COLOR_ID);
-        mImageView = (ImageView) findViewById(R.id.iv);
+        _displayColor = (FrameLayout) findViewById(R.id.FRAME_LAYOUT_COLOR_ID);
+        _imageView = (ImageView) findViewById(R.id.iv);
 
-        //displayColor.setBackgroundColor(Color.parseColor("#FFFF0000"));
+
 
         //Création d'une instance de la caméra
         _camera = getCameraInstance();
@@ -102,6 +101,35 @@ public class CameraActivity extends AppCompatActivity {
         preview.addView(_preview);
     }
 
+
+    @Override
+    public void onPause() {
+        Log.e("onpause","L'activité est en pause");
+        super.onPause();
+        finish();
+    }
+
+    //Gestion Camera
+    public static Camera getCameraInstance(){
+        Camera c = null;
+        try {
+            c = Camera.open(); //  essaie ouverture de la camera
+        }
+        catch (Exception e){
+            // Camera non disponible
+        }
+        return c; // returns null if camera is unavailable
+    }
+    private void releaseCamera() {
+        _preview.mCamera = null;
+        if (_camera != null) {
+            _camera.stopPreview();
+            _camera.release();        // relacher la camera pour que d'autre app puisse y acceder
+            _camera = null;
+
+        }
+    }
+    //Dessin figure sur preview
     public void dessinRectangle(Camera.Parameters params) {
         Bitmap bitmap = Bitmap.createBitmap(
                 params.getPreviewSize().width, // Width
@@ -134,37 +162,14 @@ public class CameraActivity extends AppCompatActivity {
         canvas.drawRect(rectangle,paint);
 
         // Display the newly created bitmap on app interface
-        mImageView.setImageBitmap(bitmap);
+        _imageView.setImageBitmap(bitmap);
 
     }
 
-    @Override
-    public void onPause() {
-        Log.e("onpause","L'activité est en pause");
-        super.onPause();
-        finish();
-    }
 
 
-    public static Camera getCameraInstance(){
-        Camera c = null;
-        try {
-            c = Camera.open(); // attempt to get a Camera instance
-        }
-        catch (Exception e){
-            // Camera is not available (in use or does not exist)
-        }
-        return c; // returns null if camera is unavailable
-    }
-    private void releaseCamera() {
-        _preview.mCamera = null;
-        if (_camera != null) {
-            _camera.stopPreview();
-            _camera.release();        // release the camera for other applications
-            _camera = null;
 
-        }
-    }
+
 
 
     /**     ----------------------------------------------------------------------------
@@ -201,7 +206,7 @@ public class CameraActivity extends AppCompatActivity {
 
             tab = test.decode() ;
 
-            displayColor.setBackgroundColor(tab[1]);
+            _displayColor.setBackgroundColor(tab[1]);
 
         }
 
