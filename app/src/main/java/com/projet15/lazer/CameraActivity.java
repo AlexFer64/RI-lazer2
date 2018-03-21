@@ -2,22 +2,36 @@ package com.projet15.lazer;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ImageFormat;
+import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+
+import android.view.View;
+
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import 	android.hardware.Camera;
 
+
 import java.util.ArrayList;
+
+
+
+
 import java.util.List;
+import java.util.Optional;
 
 
 //TODO:récuperer les marqueurs
@@ -33,15 +47,22 @@ public class CameraActivity extends AppCompatActivity {
     private Parameter _parametreDeLexercice;
     private TextView _callBack;
     private Camera _camera;
+
     private CameraPreviewPixel _preview;
-    //private Button _button;
+
     private FrameLayout displayColor;
+    private ImageView mImageView;
+
+
+
 
     //Cycle de Vie de l'application
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
+
 
         String TAG = "aaaaaaaaaaaaaaaaaaaaaaa";
         Log.v(TAG, "index");
@@ -52,8 +73,8 @@ public class CameraActivity extends AppCompatActivity {
 
         //Récupération du bouton et du texte
         _callBack = (TextView) findViewById(R.id.CALLBACK_TEXT_VIEW_ID);
-        //_button = (Button) findViewById(R.id.TAKE_PICTURE_BUTTON_ID);
         displayColor = (FrameLayout) findViewById(R.id.FRAME_LAYOUT_COLOR_ID);
+        mImageView = (ImageView) findViewById(R.id.iv);
 
         //displayColor.setBackgroundColor(Color.parseColor("#FFFF0000"));
 
@@ -69,25 +90,61 @@ public class CameraActivity extends AppCompatActivity {
             Camera.Parameters ParametreCamera = _camera.getParameters(); //récuperer les paramètres de la caméra
             ParametreCamera.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO); //rajouter le mode autofocus
             //ParametreCamera.setPictureFormat(ImageFormat.FLEX_RGB_888);
-            ParametreCamera.setPreviewSize(640,480);
+            ParametreCamera.setPreviewSize(1920,1080);
             _camera.setParameters(ParametreCamera); //réattribuer les nouveaux paramètres à la caméra
         }
+
+        dessinRectangle(params);
 
         //Création de la prévisualisation et paramétrage de cette application comme contenu de du framelayout
         _preview = new CameraPreviewPixel(this, _camera);
         FrameLayout preview = (FrameLayout) findViewById(R.id.CAMERA_FRAME_LAYOUT_ID);
         preview.addView(_preview);
+    }
 
+    public void dessinRectangle(Camera.Parameters params) {
+        Bitmap bitmap = Bitmap.createBitmap(
+                params.getPreviewSize().width, // Width
+                params.getPreviewSize().height, // Height
+                Bitmap.Config.ARGB_8888 // Config
+        );
+
+        // Initialize a new Canvas instance
+        Canvas canvas = new Canvas(bitmap);
+
+        canvas.drawColor(Color.TRANSPARENT);
+
+        // Initialize a new Paint instance to draw the Rectangle
+        Paint paint = new Paint();
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setColor(Color.rgb( 255, 0, 0));
+
+        // Set a pixels value to padding around the rectangle
+        int ecart = 50;
+
+        // Initialize a new Rect object
+        Rect rectangle = new Rect(
+                canvas.getWidth()/2 - ecart, // Left
+                canvas.getHeight()/2 - ecart, // Top
+                canvas.getWidth()/2 + ecart,// Right
+                canvas.getHeight()/2 + ecart // Bottom
+        );
+
+        // Finally, draw the rectangle on the canvas
+        canvas.drawRect(rectangle,paint);
+
+        // Display the newly created bitmap on app interface
+        mImageView.setImageBitmap(bitmap);
 
     }
 
     @Override
     public void onPause() {
-       Log.e("onpause","L'activité est en pause");
+        Log.e("onpause","L'activité est en pause");
         super.onPause();
         // Stop camera access
-       releaseCamera();
-       finish();
+        releaseCamera();
+        finish();
     }
 
 
@@ -164,6 +221,10 @@ public class CameraActivity extends AppCompatActivity {
             }
         }
     }
+
+
+
+
 
 
 }
