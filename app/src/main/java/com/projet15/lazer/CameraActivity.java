@@ -8,6 +8,8 @@ import android.graphics.Color;
 import android.graphics.ImageFormat;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.media.AudioManager;
+import android.media.ToneGenerator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -32,6 +34,8 @@ import java.util.ArrayList;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 //TODO:récuperer les marqueurs
@@ -51,7 +55,10 @@ public class CameraActivity extends AppCompatActivity {
     private CameraPreviewPixel _preview;
 
     private FrameLayout displayColor;
+    private Rectangle _rectangle;
     private ImageView mImageView;
+    private Timer myTimer;
+
 
 
 
@@ -62,6 +69,10 @@ public class CameraActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
+
+        MyTimerTask myTask = new MyTimerTask();
+        myTimer = new Timer();
+
 
 
         String TAG = "aaaaaaaaaaaaaaaaaaaaaaa";
@@ -76,13 +87,14 @@ public class CameraActivity extends AppCompatActivity {
         displayColor = (FrameLayout) findViewById(R.id.FRAME_LAYOUT_COLOR_ID);
         mImageView = (ImageView) findViewById(R.id.iv);
 
-        //displayColor.setBackgroundColor(Color.parseColor("#FFFF0000"));
-
         //Création d'une instance de la caméra
         _camera = getCameraInstance();
 
         //Paramétrage de l'autofocus
         Camera.Parameters params = _camera.getParameters(); //paramètres de la caméra
+
+        _rectangle=new Rectangle(params, mImageView);
+        _rectangle.dessinRectangle();
 
         List<String> focusModes = params.getSupportedFocusModes();
         if (focusModes.contains(Camera.Parameters.FOCUS_MODE_AUTO)) {
@@ -94,7 +106,14 @@ public class CameraActivity extends AppCompatActivity {
             _camera.setParameters(ParametreCamera); //réattribuer les nouveaux paramètres à la caméra
         }
 
-        dessinRectangle(params);
+        if(_parametreDeLexercice.get_bipIntervale() == -1)
+        {
+            myTimer.schedule(myTask, _parametreDeLexercice.get_time()*1000);
+        }
+        else
+        {
+            myTimer.schedule(myTask, _parametreDeLexercice.get_time()*1000,(int) _parametreDeLexercice.get_bipIntervale()*1000);
+        }
 
         //Création de la prévisualisation et paramétrage de cette application comme contenu de du framelayout
         _preview = new CameraPreviewPixel(this, _camera);
@@ -102,48 +121,27 @@ public class CameraActivity extends AppCompatActivity {
         preview.addView(_preview);
     }
 
-    public void dessinRectangle(Camera.Parameters params) {
-        Bitmap bitmap = Bitmap.createBitmap(
-                params.getPreviewSize().width, // Width
-                params.getPreviewSize().height, // Height
-                Bitmap.Config.ARGB_8888 // Config
-        );
+    class MyTimerTask extends TimerTask {
+        public void run() {
+            runOnUiThread(new Runnable() {
 
-        // Initialize a new Canvas instance
-        Canvas canvas = new Canvas(bitmap);
-
-        canvas.drawColor(Color.TRANSPARENT);
-
-        // Initialize a new Paint instance to draw the Rectangle
-        Paint paint = new Paint();
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setColor(Color.rgb( 255, 0, 0));
-
-        // Set a pixels value to padding around the rectangle
-        int ecart = 50;
-
-        // Initialize a new Rect object
-        Rect rectangle = new Rect(
-                canvas.getWidth()/2 - ecart, // Left
-                canvas.getHeight()/2 - ecart, // Top
-                canvas.getWidth()/2 + ecart,// Right
-                canvas.getHeight()/2 + ecart // Bottom
-        );
-
-        // Finally, draw the rectangle on the canvas
-        canvas.drawRect(rectangle,paint);
-
-        // Display the newly created bitmap on app interface
-        mImageView.setImageBitmap(bitmap);
-
+                @Override
+                public void run() {
+                    ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
+                    Log.e("TonGen","Biiip");
+                    toneGen1.startTone(ToneGenerator.TONE_CDMA_PIP,150);
+                }
+            });
+        }
     }
 
     @Override
     public void onPause() {
         Log.e("onpause","L'activité est en pause");
         super.onPause();
-        // Stop camera access
-        releaseCamera();
+
+        myTimer.cancel();
+        myTimer.purge();
         finish();
     }
 
