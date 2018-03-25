@@ -38,13 +38,15 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-//TODO:récuperer les marqueurs
-//TODO:récupéré les coordonnées du laser en fonction du temps et les enregistrer dans un variables "list<>"par exemple ou un tableau
+//TODO:dessiner trois carré pour y placé les marqueur
+//TODO:récupérer les coordonnées du laser en fonction du temps et les enregistrer dans un variables "list<>"par exemple ou un tableau
+//TODO:Gérer le type d'exo
 //TODO: gerer le temps de l'exercice
 //TODO:tracker le laser sur l'écran
 //TODO:Emetre des bip à intervalle régulier
 //TODO:sauvegarder les coordonnées dans un fichier csv
-//TODO:Géré les different scénario d'erreurs (voir maquettes et scénario)
+//TODO:Gerer les Threads
+//TODO:Gérer les different scénario d'erreurs (voir maquettes et scénario)
 
 public class CameraActivity extends AppCompatActivity {
     private Intent _intent;
@@ -54,11 +56,16 @@ public class CameraActivity extends AppCompatActivity {
 
     private CameraPreviewPixel _preview;
 
+<<<<<<< HEAD
     private FrameLayout displayColor;
     private Rectangle _rectangle;
     private ImageView mImageView;
     private Timer myTimer;
 
+=======
+    private FrameLayout _displayColor;
+    private ImageView _imageView;
+>>>>>>> Test
 
 
 
@@ -75,18 +82,20 @@ public class CameraActivity extends AppCompatActivity {
 
 
 
-        String TAG = "aaaaaaaaaaaaaaaaaaaaaaa";
-        Log.v(TAG, "index");
-
         //Recupération des données du formulaire
         _intent = getIntent();
         _parametreDeLexercice = (Parameter) _intent.getSerializableExtra("parameters");
 
         //Récupération du bouton et du texte
         _callBack = (TextView) findViewById(R.id.CALLBACK_TEXT_VIEW_ID);
-        displayColor = (FrameLayout) findViewById(R.id.FRAME_LAYOUT_COLOR_ID);
-        mImageView = (ImageView) findViewById(R.id.iv);
+        _displayColor = (FrameLayout) findViewById(R.id.FRAME_LAYOUT_COLOR_ID);
+        _imageView = (ImageView) findViewById(R.id.iv);
 
+
+<<<<<<< HEAD
+=======
+
+>>>>>>> Test
         //Création d'une instance de la caméra
         _camera = getCameraInstance();
 
@@ -121,6 +130,7 @@ public class CameraActivity extends AppCompatActivity {
         preview.addView(_preview);
     }
 
+<<<<<<< HEAD
     class MyTimerTask extends TimerTask {
         public void run() {
             runOnUiThread(new Runnable() {
@@ -144,32 +154,77 @@ public class CameraActivity extends AppCompatActivity {
         myTimer.purge();
         finish();
     }
+=======
 
     @Override
-    public void onResume(){
-        super.onResume();
-        _camera = getCameraInstance();
-        _preview = new CameraPreviewPixel(this, _camera);
-        FrameLayout preview = (FrameLayout) findViewById(R.id.CAMERA_FRAME_LAYOUT_ID);
-        preview.addView(_preview);
-
+    public void onPause() {
+        Log.e("onpause","L'activité est en pause");
+        super.onPause();
+        finish();
     }
+
+    //Gestion Camera
     public static Camera getCameraInstance(){
         Camera c = null;
         try {
-            c = Camera.open(); // attempt to get a Camera instance
+            c = Camera.open(); //  essaie ouverture de la camera
         }
         catch (Exception e){
-            // Camera is not available (in use or does not exist)
+            // Camera non disponible
         }
         return c; // returns null if camera is unavailable
     }
     private void releaseCamera() {
+        _preview.mCamera = null;
         if (_camera != null) {
-            _camera.release();        // release the camera for other applications
+            _camera.stopPreview();
+            _camera.release();        // relacher la camera pour que d'autre app puisse y acceder
             _camera = null;
+
         }
     }
+    //Dessin figure sur preview
+    public void dessinRectangle(Camera.Parameters params) {
+        Bitmap bitmap = Bitmap.createBitmap(
+                params.getPreviewSize().width, // Width
+                params.getPreviewSize().height, // Height
+                Bitmap.Config.ARGB_8888 // Config
+        );
+
+        // Initialize a new Canvas instance
+        Canvas canvas = new Canvas(bitmap);
+
+        canvas.drawColor(Color.TRANSPARENT);
+
+        // Initialize a new Paint instance to draw the Rectangle
+        Paint paint = new Paint();
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setColor(Color.rgb( 255, 0, 0));
+
+        // Set a pixels value to padding around the rectangle
+        int ecart = 50;
+
+        // Initialize a new Rect object
+        Rect rectangle = new Rect(
+                canvas.getWidth()/2 - ecart, // Left
+                canvas.getHeight()/2 - ecart, // Top
+                canvas.getWidth()/2 + ecart,// Right
+                canvas.getHeight()/2 + ecart // Bottom
+        );
+
+        // Finally, draw the rectangle on the canvas
+        canvas.drawRect(rectangle,paint);
+
+        // Display the newly created bitmap on app interface
+        _imageView.setImageBitmap(bitmap);
+
+    }
+
+>>>>>>> Test
+
+
+
+
 
 
     /**     ----------------------------------------------------------------------------
@@ -180,7 +235,7 @@ public class CameraActivity extends AppCompatActivity {
 
 
     public class CameraPreviewPixel extends CameraPreview implements SurfaceHolder.Callback, Camera.PreviewCallback {
-        private SurfaceHolder mHolder;
+     private SurfaceHolder mHolder;
         private Camera mCamera;
 
         //Settings de la caméra
@@ -206,13 +261,12 @@ public class CameraActivity extends AppCompatActivity {
 
             tab = test.decode() ;
 
-            displayColor.setBackgroundColor(tab[1]);
+            _displayColor.setBackgroundColor(tab[1]);
 
+        }
 
-            //Log.e("pixel en haut à gauche:","");
-            //Log.e("Rouge: ", Integer.toString(rTmp));
-            //Log.e("Vert :", Integer.toString(gTmp));
-            //Log.e("Bleu :", Integer.toString(bTmp));
+        @Override
+        public void  surfaceDestroyed(SurfaceHolder holder){
 
         }
     }

@@ -24,6 +24,7 @@
       </value>
     </option>
   </component>
+<<<<<<< Updated upstream
   <component name="ProjectResources">
     <resource url="http://schemas.android.com/tools" location="$PROJECT_DIR$" />
   </component>

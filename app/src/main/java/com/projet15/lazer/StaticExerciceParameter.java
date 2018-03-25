@@ -19,7 +19,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 //TODO:demande de confirmation de temps au dela de 5min = 480s
-
+//TODO:Verification Temps > 0
 public class StaticExerciceParameter extends AppCompatActivity {
 
     //Variables
