@@ -19,7 +19,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 //TODO:demande de confirmation de temps au dela de 5min = 480s
-//TODO:Verification Temps > 0
+
 public class StaticExerciceParameter extends AppCompatActivity {
 
     //Variables
@@ -44,7 +44,7 @@ public class StaticExerciceParameter extends AppCompatActivity {
         _toolbar.setNavigationOnClickListener(new View.OnClickListener() { //mettre un listner à l'icone qui reviens au menu principal quand on clique dessus
             @Override
             public void onClick(View view) {
-           finish();  //termine l'activité pour retourné au menu principal
+              finish();  //termine l'activité pour retourné au menu principal
             }
         });
 
@@ -75,10 +75,7 @@ public class StaticExerciceParameter extends AppCompatActivity {
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 submitForm(view);
-
             }
         });
 
@@ -164,7 +161,11 @@ public class StaticExerciceParameter extends AppCompatActivity {
             _layoutMarkDistance.setError(getString(R.string.Err_Mark_Distance));
             requestFocus(_markDistance);
             return false;
-        } else {
+        }else if(Integer.parseInt(_markDistance.getText().toString())<= 0){
+            _layoutMarkDistance.setError(getString(R.string.Err_Mark_Distance_InfOrEq_0));
+            requestFocus(_markDistance);
+        }
+        else {
             _layoutMarkDistance.setErrorEnabled(false);
         }
 
@@ -176,7 +177,12 @@ public class StaticExerciceParameter extends AppCompatActivity {
             _layoutTime.setError(getString(R.string.Err_Time));
             requestFocus(_time);
             return false;
-        } else {
+        }
+        else if(Integer.parseInt(_time.getText().toString()) <= 0){
+            _layoutTime.setError(getString(R.string.Err_Time_InfOrEq_0));
+            requestFocus(_time);
+            return false;
+        }else {
             _layoutTime.setErrorEnabled(false);
         }
 
@@ -199,11 +205,9 @@ public class StaticExerciceParameter extends AppCompatActivity {
         }
 
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
         }
 
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2){
-
         }
 
         public void afterTextChanged(Editable editable){ //après qu'on est changé le texte d'un champ, on attend pas la validation pour vérifer que c'est nom vide: pour pouvoir supprimer les messsages d'erreur dès qu'on entre quelque chose

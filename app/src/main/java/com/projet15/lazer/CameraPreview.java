@@ -60,10 +60,6 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
     public void surfaceDestroyed(SurfaceHolder holder) {
 
-<<<<<<< HEAD
-
-=======
->>>>>>> Test
     }
 
     public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
@@ -92,7 +88,6 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     public void onPreviewFrame(byte[] data, Camera camera) {
         //transformer les pixels du formats NV21 au format RGB
         //decodePixels(pixels, data, previewSize.width, previewSize.height);
-
 
         //Log.i("Pixels", "The top right pixel has the following RGB (hexadecimal) values:" +Integer.toHexString(pixels[0]));
     }

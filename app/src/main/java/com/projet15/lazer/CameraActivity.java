@@ -27,6 +27,12 @@ import android.widget.Toast;
 import 	android.hardware.Camera;
 
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 
@@ -38,12 +44,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-//TODO:dessiner trois carré pour y placé les marqueur
+//TODO:dessiner trois carré pour y placé les marqueur adaptatif aux ecrans
 //TODO:récupérer les coordonnées du laser en fonction du temps et les enregistrer dans un variables "list<>"par exemple ou un tableau
-//TODO:Gérer le type d'exo
-//TODO: gerer le temps de l'exercice
 //TODO:tracker le laser sur l'écran
-//TODO:Emetre des bip à intervalle régulier
 //TODO:sauvegarder les coordonnées dans un fichier csv
 //TODO:Gerer les Threads
 //TODO:Gérer les different scénario d'erreurs (voir maquettes et scénario)
@@ -55,21 +58,14 @@ public class CameraActivity extends AppCompatActivity {
     private Camera _camera;
 
     private CameraPreviewPixel _preview;
-
-<<<<<<< HEAD
     private FrameLayout displayColor;
     private Rectangle _rectangle;
     private ImageView mImageView;
     private Timer myTimer;
-
-=======
     private FrameLayout _displayColor;
-    private ImageView _imageView;
->>>>>>> Test
-
-
-
-
+    private ImageView _imageView ;
+    private ArrayList<CoordonneesEnFonctionDuTemps> donneesAenregistrer = new ArrayList<CoordonneesEnFonctionDuTemps>();
+    private CSVFile fichierauvegarde = new CSVFile("/test.csv",",");
     //Cycle de Vie de l'application
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +75,6 @@ public class CameraActivity extends AppCompatActivity {
 
         MyTimerTask myTask = new MyTimerTask();
         myTimer = new Timer();
-
 
 
         //Recupération des données du formulaire
@@ -92,17 +87,13 @@ public class CameraActivity extends AppCompatActivity {
         _imageView = (ImageView) findViewById(R.id.iv);
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> Test
         //Création d'une instance de la caméra
         _camera = getCameraInstance();
 
         //Paramétrage de l'autofocus
         Camera.Parameters params = _camera.getParameters(); //paramètres de la caméra
 
-        _rectangle=new Rectangle(params, mImageView);
+        _rectangle=new Rectangle(params, _imageView);
         _rectangle.dessinRectangle();
 
         List<String> focusModes = params.getSupportedFocusModes();
@@ -128,9 +119,28 @@ public class CameraActivity extends AppCompatActivity {
         _preview = new CameraPreviewPixel(this, _camera);
         FrameLayout preview = (FrameLayout) findViewById(R.id.CAMERA_FRAME_LAYOUT_ID);
         preview.addView(_preview);
+
+
+        /*****************************************************************
+         *                                                               *
+         *                  Test Sauvegarde Fichier csv                  *
+         *                                                               *
+         *****************************************************************/
+
+        CoordonneesEnFonctionDuTemps c = new CoordonneesEnFonctionDuTemps(10,2,3);
+        donneesAenregistrer.add(c);
+        try {
+            fichierauvegarde.save(donneesAenregistrer);
+            Log.i("fileSave","File has been save");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.e("fileSave","File can't be save");
+        }
+
+
     }
 
-<<<<<<< HEAD
+
     class MyTimerTask extends TimerTask {
         public void run() {
             runOnUiThread(new Runnable() {
@@ -152,14 +162,6 @@ public class CameraActivity extends AppCompatActivity {
 
         myTimer.cancel();
         myTimer.purge();
-        finish();
-    }
-=======
-
-    @Override
-    public void onPause() {
-        Log.e("onpause","L'activité est en pause");
-        super.onPause();
         finish();
     }
 
@@ -219,12 +221,6 @@ public class CameraActivity extends AppCompatActivity {
         _imageView.setImageBitmap(bitmap);
 
     }
-
->>>>>>> Test
-
-
-
-
 
 
     /**     ----------------------------------------------------------------------------
