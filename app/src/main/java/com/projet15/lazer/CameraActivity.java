@@ -56,16 +56,11 @@ public class CameraActivity extends AppCompatActivity {
 
     private CameraPreviewPixel _preview;
 
-<<<<<<< HEAD
-    private FrameLayout displayColor;
     private Rectangle _rectangle;
-    private ImageView mImageView;
     private Timer myTimer;
 
-=======
     private FrameLayout _displayColor;
     private ImageView _imageView;
->>>>>>> Test
 
 
 
@@ -92,17 +87,13 @@ public class CameraActivity extends AppCompatActivity {
         _imageView = (ImageView) findViewById(R.id.iv);
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> Test
         //Création d'une instance de la caméra
         _camera = getCameraInstance();
 
         //Paramétrage de l'autofocus
         Camera.Parameters params = _camera.getParameters(); //paramètres de la caméra
 
-        _rectangle=new Rectangle(params, mImageView);
+        _rectangle=new Rectangle(params, _imageView);
         _rectangle.dessinRectangle();
 
         List<String> focusModes = params.getSupportedFocusModes();
@@ -130,20 +121,7 @@ public class CameraActivity extends AppCompatActivity {
         preview.addView(_preview);
     }
 
-<<<<<<< HEAD
-    class MyTimerTask extends TimerTask {
-        public void run() {
-            runOnUiThread(new Runnable() {
 
-                @Override
-                public void run() {
-                    ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
-                    Log.e("TonGen","Biiip");
-                    toneGen1.startTone(ToneGenerator.TONE_CDMA_PIP,150);
-                }
-            });
-        }
-    }
 
     @Override
     public void onPause() {
@@ -152,14 +130,6 @@ public class CameraActivity extends AppCompatActivity {
 
         myTimer.cancel();
         myTimer.purge();
-        finish();
-    }
-=======
-
-    @Override
-    public void onPause() {
-        Log.e("onpause","L'activité est en pause");
-        super.onPause();
         finish();
     }
 
@@ -183,44 +153,6 @@ public class CameraActivity extends AppCompatActivity {
 
         }
     }
-    //Dessin figure sur preview
-    public void dessinRectangle(Camera.Parameters params) {
-        Bitmap bitmap = Bitmap.createBitmap(
-                params.getPreviewSize().width, // Width
-                params.getPreviewSize().height, // Height
-                Bitmap.Config.ARGB_8888 // Config
-        );
-
-        // Initialize a new Canvas instance
-        Canvas canvas = new Canvas(bitmap);
-
-        canvas.drawColor(Color.TRANSPARENT);
-
-        // Initialize a new Paint instance to draw the Rectangle
-        Paint paint = new Paint();
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setColor(Color.rgb( 255, 0, 0));
-
-        // Set a pixels value to padding around the rectangle
-        int ecart = 50;
-
-        // Initialize a new Rect object
-        Rect rectangle = new Rect(
-                canvas.getWidth()/2 - ecart, // Left
-                canvas.getHeight()/2 - ecart, // Top
-                canvas.getWidth()/2 + ecart,// Right
-                canvas.getHeight()/2 + ecart // Bottom
-        );
-
-        // Finally, draw the rectangle on the canvas
-        canvas.drawRect(rectangle,paint);
-
-        // Display the newly created bitmap on app interface
-        _imageView.setImageBitmap(bitmap);
-
-    }
-
->>>>>>> Test
 
 
 
