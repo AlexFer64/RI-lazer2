@@ -89,7 +89,6 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         //transformer les pixels du formats NV21 au format RGB
         //decodePixels(pixels, data, previewSize.width, previewSize.height);
 
-
         //Log.i("Pixels", "The top right pixel has the following RGB (hexadecimal) values:" +Integer.toHexString(pixels[0]));
     }
 

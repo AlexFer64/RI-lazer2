@@ -27,6 +27,12 @@ import android.widget.Toast;
 import 	android.hardware.Camera;
 
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 
@@ -38,12 +44,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-//TODO:dessiner trois carré pour y placé les marqueur
+//TODO:dessiner trois carré pour y placé les marqueur adaptatif aux ecrans
 //TODO:récupérer les coordonnées du laser en fonction du temps et les enregistrer dans un variables "list<>"par exemple ou un tableau
-//TODO:Gérer le type d'exo
-//TODO: gerer le temps de l'exercice
 //TODO:tracker le laser sur l'écran
-//TODO:Emetre des bip à intervalle régulier
 //TODO:sauvegarder les coordonnées dans un fichier csv
 //TODO:Gerer les Threads
 //TODO:Gérer les different scénario d'erreurs (voir maquettes et scénario)
@@ -55,9 +58,14 @@ public class CameraActivity extends AppCompatActivity {
     private Camera _camera;
 
     private CameraPreviewPixel _preview;
+<<<<<<< HEAD
 
+=======
+    private FrameLayout displayColor;
+>>>>>>> master
     private Rectangle _rectangle;
     private Timer myTimer;
+<<<<<<< HEAD
 
     private FrameLayout _displayColor;
     private ImageView _imageView;
@@ -65,6 +73,12 @@ public class CameraActivity extends AppCompatActivity {
 
 
 
+=======
+    private FrameLayout _displayColor;
+    private ImageView _imageView ;
+    private ArrayList<CoordonneesEnFonctionDuTemps> donneesAenregistrer = new ArrayList<CoordonneesEnFonctionDuTemps>();
+    private CSVFile fichierauvegarde = new CSVFile("/test.csv",",");
+>>>>>>> master
     //Cycle de Vie de l'application
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +88,6 @@ public class CameraActivity extends AppCompatActivity {
 
         MyTimerTask myTask = new MyTimerTask();
         myTimer = new Timer();
-
 
 
         //Recupération des données du formulaire
@@ -119,9 +132,44 @@ public class CameraActivity extends AppCompatActivity {
         _preview = new CameraPreviewPixel(this, _camera);
         FrameLayout preview = (FrameLayout) findViewById(R.id.CAMERA_FRAME_LAYOUT_ID);
         preview.addView(_preview);
+
+
+        /*****************************************************************
+         *                                                               *
+         *                  Test Sauvegarde Fichier csv                  *
+         *                                                               *
+         *****************************************************************/
+
+        CoordonneesEnFonctionDuTemps c = new CoordonneesEnFonctionDuTemps(10,2,3);
+        donneesAenregistrer.add(c);
+        try {
+            fichierauvegarde.save(donneesAenregistrer);
+            Log.i("fileSave","File has been save");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.e("fileSave","File can't be save");
+        }
+
+
     }
 
 
+<<<<<<< HEAD
+=======
+    class MyTimerTask extends TimerTask {
+        public void run() {
+            runOnUiThread(new Runnable() {
+
+                @Override
+                public void run() {
+                    ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
+                    Log.e("TonGen","Biiip");
+                    toneGen1.startTone(ToneGenerator.TONE_CDMA_PIP,150);
+                }
+            });
+        }
+    }
+>>>>>>> master
 
     @Override
     public void onPause() {
@@ -153,10 +201,49 @@ public class CameraActivity extends AppCompatActivity {
 
         }
     }
+<<<<<<< HEAD
 
 
 
 
+=======
+    //Dessin figure sur preview
+    public void dessinRectangle(Camera.Parameters params) {
+        Bitmap bitmap = Bitmap.createBitmap(
+                params.getPreviewSize().width, // Width
+                params.getPreviewSize().height, // Height
+                Bitmap.Config.ARGB_8888 // Config
+        );
+
+        // Initialize a new Canvas instance
+        Canvas canvas = new Canvas(bitmap);
+
+        canvas.drawColor(Color.TRANSPARENT);
+
+        // Initialize a new Paint instance to draw the Rectangle
+        Paint paint = new Paint();
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setColor(Color.rgb( 255, 0, 0));
+
+        // Set a pixels value to padding around the rectangle
+        int ecart = 50;
+
+        // Initialize a new Rect object
+        Rect rectangle = new Rect(
+                canvas.getWidth()/2 - ecart, // Left
+                canvas.getHeight()/2 - ecart, // Top
+                canvas.getWidth()/2 + ecart,// Right
+                canvas.getHeight()/2 + ecart // Bottom
+        );
+
+        // Finally, draw the rectangle on the canvas
+        canvas.drawRect(rectangle,paint);
+
+        // Display the newly created bitmap on app interface
+        _imageView.setImageBitmap(bitmap);
+
+    }
+>>>>>>> master
 
 
     /**     ----------------------------------------------------------------------------

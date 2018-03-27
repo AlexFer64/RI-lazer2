@@ -13,10 +13,13 @@
     <string name="Err_Operator_Name">You haven`\'t fill Operator name</string>
     <string name="Mark_Distance">Mark distance (cm) </string>
     <string name="Err_Mark_Distance">You haven\'t fill Mark distance</string>
+   <string name="Err_Mark_Distance_InfOrEq_0">Mark distance can\'t be inferior or equal 0 </string>
     <string name="Time">Time (s)</string>
     <string name="Err_Time">You haven\'t fill Time</string>
+    <string name="Err_Time_InfOrEq_0"> Time cant\'t be inferior or equal 0</string>
     <string name="Bip_Interval">Bip Interval (s)</string>
     <string name="Err_Bip_Interval">You haven\'t fill Bip Interval</string>
+    <string name="Err_Bip_Interval_InfOrEq_0"> Bip Interval can\'t be inferior or equal 0</string>
     <string name="Final_Bip">Final Bip</string>
     <string name="Start_Button">START</string>
 

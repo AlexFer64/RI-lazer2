@@ -18,6 +18,8 @@ import android.view.WindowManager;
 
 import android.widget.Toast;
 
+import static com.projet15.lazer.R.string.Err_Bip_Interval_InfOrEq_0;
+
 //TODO:demande de confirmation de temps au dela de 5min = 480s
 //TODO:Verification Temps > 0
 
@@ -158,7 +160,12 @@ public class RythmExerciceParameter extends AppCompatActivity {
             _layoutMarkDistance.setError(getString(R.string.Err_Mark_Distance));
             requestFocus(_markDistance);
             return false;
-        } else {
+        }else if(Integer.parseInt(_markDistance.getText().toString())<=0){
+            _layoutMarkDistance.setError(getString(R.string.Err_Mark_Distance_InfOrEq_0));
+            requestFocus(_markDistance);
+            return false;
+        }
+        else {
             _layoutMarkDistance.setErrorEnabled(false);
         }
 
@@ -170,7 +177,12 @@ public class RythmExerciceParameter extends AppCompatActivity {
             _layoutTime.setError(getString(R.string.Err_Time));
             requestFocus(_time);
             return false;
-        } else {
+        }else if(Integer.parseInt(_time.getText().toString())<=0){
+            _layoutTime.setError(getString(R.string.Err_Time_InfOrEq_0));
+            requestFocus(_time);
+            return false;
+        }
+        else {
             _layoutTime.setErrorEnabled(false);
         }
 
@@ -180,6 +192,10 @@ public class RythmExerciceParameter extends AppCompatActivity {
     private boolean validateBipInterval(){
         if (_bipInterval.getText().toString().trim().isEmpty()) {
             _layoutBipInterval.setError(getString(R.string.Err_Bip_Interval));
+            requestFocus(_bipInterval);
+            return false;
+        }else if( Integer.parseInt(_bipInterval.getText().toString()) <= 0){
+            _layoutBipInterval.setError(getString(R.string.Err_Bip_Interval_InfOrEq_0));
             requestFocus(_bipInterval);
             return false;
         } else {
