@@ -43,6 +43,8 @@ import java.util.Optional;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static android.graphics.Color.rgb;
+
 
 //TODO:dessiner trois carré pour y placé les marqueur adaptatif aux ecrans
 //TODO:récupérer les coordonnées du laser en fonction du temps et les enregistrer dans un variables "list<>"par exemple ou un tableau
@@ -64,8 +66,13 @@ public class CameraActivity extends AppCompatActivity {
     private Timer myTimer;
     private FrameLayout _displayColor;
     private ImageView _imageView ;
+
     private ArrayList<CoordonneesEnFonctionDuTemps> donneesAenregistrer = new ArrayList<CoordonneesEnFonctionDuTemps>();
-    private CSVFile fichierauvegarde = new CSVFile("/test.csv",",");
+
+    private Context context;
+    private File directory = new File("");
+
+
     //Cycle de Vie de l'application
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,16 +134,32 @@ public class CameraActivity extends AppCompatActivity {
          *                                                               *
          *****************************************************************/
 
-        CoordonneesEnFonctionDuTemps c = new CoordonneesEnFonctionDuTemps(10,2,3);
-        donneesAenregistrer.add(c);
-        try {
-            fichierauvegarde.save(donneesAenregistrer);
-            Log.i("fileSave","File has been save");
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.e("fileSave","File can't be save");
-        }
+        File fichierASauvegarder = new File(directory, "test.csv");
+        Log.e("directory",fichierASauvegarder.getName());
+        boolean estCree = fichierASauvegarder.exists();
+        if(!estCree) {
+            try {
 
+                // To open you can choose the mode MODE_PRIVATE, MODE_APPEND,
+                // MODE_WORLD_READABLE, MODE_WORLD_WRITEABLE
+                // This is the creation mode (Private, World Readable et World Writable),
+                // Append is used to open the file and write at its end
+               FileOutputStream test = new FileOutputStream(fichierASauvegarder);
+               test.flush();
+               FileOutputStream fos = openFileOutput(fichierASauvegarder.getAbsolutePath(), Context.MODE_PRIVATE);
+                // Open the writer
+                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fos);
+                // Write
+                outputStreamWriter.write("test");
+                // Close streams
+                outputStreamWriter.close();
+                fos.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 
@@ -201,7 +224,7 @@ public class CameraActivity extends AppCompatActivity {
         // Initialize a new Paint instance to draw the Rectangle
         Paint paint = new Paint();
         paint.setStyle(Paint.Style.STROKE);
-        paint.setColor(Color.rgb( 255, 0, 0));
+        paint.setColor(rgb( 255, 0, 0));
 
         // Set a pixels value to padding around the rectangle
         int ecart = 50;
@@ -257,7 +280,12 @@ public class CameraActivity extends AppCompatActivity {
 
             tab = test.decode() ;
 
-            _displayColor.setBackgroundColor(tab[1]);
+
+            int r = (tab[(720*240)+360]&0x00FF0000)>>16;
+            int g = (tab[(720*240)+360]&0x0000FF00)>>8;
+            int b = (tab[(720*240)+360]&0x000000FF);
+
+            _displayColor.setBackgroundColor(rgb(r,g,b));
 
         }
 

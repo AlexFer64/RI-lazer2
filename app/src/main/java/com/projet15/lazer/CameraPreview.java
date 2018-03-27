@@ -50,6 +50,8 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
             //récupérer les param de la caméra
             parameters = mCamera.getParameters();
+            parameters.setPreviewSize(720,480);
+            mCamera.setParameters(parameters);
             previewSize = parameters.getPreviewSize();
             pixels = new int[previewSize.width * previewSize.height]; //width sont des attributs et n'ont pas de getters
 
@@ -75,6 +77,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
             //récupérer les param de la caméra
             parameters = mCamera.getParameters();
+            parameters.setPreviewSize(720,480);
             previewSize = parameters.getPreviewSize();
             Log.e("TEST WIDTH", Integer.toString(previewSize.width));
             Log.e("TEST HEIGH", Integer.toString(previewSize.height));
@@ -91,7 +94,6 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
         //Log.i("Pixels", "The top right pixel has the following RGB (hexadecimal) values:" +Integer.toHexString(pixels[0]));
     }
-
 
 
 }
