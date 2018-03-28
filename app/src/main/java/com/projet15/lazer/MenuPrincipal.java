@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.transition.Fade;
@@ -41,11 +42,11 @@ public class MenuPrincipal extends  AppCompatActivity{
 
         }
 
-        //transitions
+        /**transitions
         setupWindowAnimations();
-        //http://lgvalle.xyz/2015/06/07/material-animations/
-        //https://developer.android.com/training/transitions/index.html
-        //https://developer.android.com/training/transitions/start-activity.html#custom-trans
+        http://lgvalle.xyz/2015/06/07/material-animations/
+        https://developer.android.com/training/transitions/index.html
+        https://developer.android.com/training/transitions/start-activity.html#custom-trans**/
 
 
         //association des objets Java aux objets graphique
@@ -58,16 +59,53 @@ public class MenuPrincipal extends  AppCompatActivity{
         get_staticButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Check if we're running on Android 5.0 or higher
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    // Apply activity transition
-                    Intent i = new Intent(view.getContext(), StaticExerciceParameter.class); //association de l'activité principale et de l'activité exercice statique parameter
-                    startActivity(i); //lancement de l'activitéexercice statique parameter
-                } else {
-                    // Start without transition
-                    Intent i = new Intent(view.getContext(), StaticExerciceParameter.class); //association de l'activité principale et de l'activité exercice statique parameter
-                    startActivity(i); //lancement de l'activitéexercice statique parameter
-                }
+            /**
+            // Check if we're running on Android 5.0 or higher
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                // Apply activity transition
+                Intent i = new Intent(view.getContext(), StaticExerciceParameter.class); //association de l'activité principale et de l'activité exercice statique parameter
+                startActivity(i); //lancement de l'activitéexercice statique parameter
+            } else {
+                // Start without transition
+                **/
+            if (ContextCompat.checkSelfPermission(getApplicationContext(), //Regarde si l'accès à la camera est autorisé
+                    Manifest.permission.CAMERA)
+                    == PackageManager.PERMISSION_GRANTED) {
+                Intent i = new Intent(view.getContext(), StaticExerciceParameter.class); //association de l'activité principale et de l'activité exercice statique parameter
+                startActivity(i); //lancement de l'activitéexercice statique parameter
+            }
+            else{
+                final AlertDialog.Builder mBuilder = new AlertDialog.Builder(MenuPrincipal.this);
+                View mView = getLayoutInflater().inflate(R.layout.dialog_permission_camera_non_accordee,null);
+                Button _boutonCancel = (Button) mView.findViewById(R.id.CANCEL_BUTTON_ID);
+                Button _boutonAuthorize =(Button) mView.findViewById(R.id.AUTHORIZE_BUTTON_ID);
+
+                _boutonCancel.getBackground().setAlpha(100); //visiblement ça marche pas mais faudrait mettre le bouton en transparent (pour qu'on voit que le texte)
+                _boutonAuthorize.getBackground().setAlpha(100); //visiblement ça marche pas mais faudrait mettre le bouton en transparent (pour qu'on voit que le texte)
+
+                mBuilder.setView(mView);
+                final AlertDialog dialog = mBuilder.create();
+                dialog.show();
+
+                _boutonCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.hide();
+                        //la dedans faut demander la permission de la caméra
+                    }
+                });
+
+                _boutonAuthorize.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.hide();
+                    }
+                });
+
+
+            }
+
+            /*}*/
 
 
             }
@@ -91,12 +129,13 @@ public class MenuPrincipal extends  AppCompatActivity{
 
     }
 
-
+    /**
     private void setupWindowAnimations() {
         Slide slide = new Slide();
         slide.setDuration(1000);
         getWindow().setExitTransition(slide);
     }
+    **/
 
     //Getteur & setteur
     public void set_staticButton (Button b){

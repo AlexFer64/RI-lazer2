@@ -13,7 +13,7 @@
     <string name="Err_Operator_Name">You haven`\'t fill Operator name</string>
     <string name="Mark_Distance">Mark distance (cm) </string>
     <string name="Err_Mark_Distance">You haven\'t fill Mark distance</string>
-   <string name="Err_Mark_Distance_InfOrEq_0">Mark distance can\'t be inferior or equal 0 </string>
+    <string name="Err_Mark_Distance_InfOrEq_0">Mark distance can\'t be inferior or equal 0 </string>
     <string name="Time">Time (s)</string>
     <string name="Err_Time">You haven\'t fill Time</string>
     <string name="Err_Time_InfOrEq_0"> Time cant\'t be inferior or equal 0</string>
@@ -22,5 +22,11 @@
     <string name="Err_Bip_Interval_InfOrEq_0"> Bip Interval can\'t be inferior or equal 0</string>
     <string name="Final_Bip">Final Bip</string>
     <string name="Start_Button">START</string>
+    
+    <!-- Boite de dialogue -->
+    <string name="Titre_Autorisation_Camera">Authorize LaZer to use the camera?</string>
+    <string name="Contenu_Autorisatoin_Camera">LaZer need your autorization to use the camera in order to track the movements of the laser.</string>
+    <string name="Bouton_Autoriser">Autorize</string>
+    <string name="Bouton_Cancel">Cancel</string>
 
 </resources>

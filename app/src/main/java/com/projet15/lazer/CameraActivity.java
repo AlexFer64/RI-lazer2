@@ -58,27 +58,17 @@ public class CameraActivity extends AppCompatActivity {
     private Camera _camera;
 
     private CameraPreviewPixel _preview;
-<<<<<<< HEAD
 
-=======
     private FrameLayout displayColor;
->>>>>>> master
+
     private Rectangle _rectangle;
     private Timer myTimer;
-<<<<<<< HEAD
 
-    private FrameLayout _displayColor;
-    private ImageView _imageView;
-
-
-
-
-=======
     private FrameLayout _displayColor;
     private ImageView _imageView ;
     private ArrayList<CoordonneesEnFonctionDuTemps> donneesAenregistrer = new ArrayList<CoordonneesEnFonctionDuTemps>();
     private CSVFile fichierauvegarde = new CSVFile("/test.csv",",");
->>>>>>> master
+
     //Cycle de Vie de l'application
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,9 +104,7 @@ public class CameraActivity extends AppCompatActivity {
             //Le mode autofocus est supporté
             Camera.Parameters ParametreCamera = _camera.getParameters(); //récuperer les paramètres de la caméra
             ParametreCamera.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO); //rajouter le mode autofocus
-            //ParametreCamera.setPictureFormat(ImageFormat.FLEX_RGB_888);
-            ParametreCamera.setPreviewSize(1920,1080);
-            _camera.setParameters(ParametreCamera); //réattribuer les nouveaux paramètres à la caméra
+
         }
 
         if(_parametreDeLexercice.get_bipIntervale() == -1)
@@ -154,8 +142,7 @@ public class CameraActivity extends AppCompatActivity {
     }
 
 
-<<<<<<< HEAD
-=======
+
     class MyTimerTask extends TimerTask {
         public void run() {
             runOnUiThread(new Runnable() {
@@ -169,7 +156,7 @@ public class CameraActivity extends AppCompatActivity {
             });
         }
     }
->>>>>>> master
+
 
     @Override
     public void onPause() {
@@ -201,12 +188,7 @@ public class CameraActivity extends AppCompatActivity {
 
         }
     }
-<<<<<<< HEAD
 
-
-
-
-=======
     //Dessin figure sur preview
     public void dessinRectangle(Camera.Parameters params) {
         Bitmap bitmap = Bitmap.createBitmap(
@@ -243,7 +225,6 @@ public class CameraActivity extends AppCompatActivity {
         _imageView.setImageBitmap(bitmap);
 
     }
->>>>>>> master
 
 
     /**     ----------------------------------------------------------------------------

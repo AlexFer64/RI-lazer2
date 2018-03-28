@@ -47,4 +47,9 @@
         <item name="colorControlHighlight">@color/GRIS_CHARTE_GRAPHIQUE</item>
     </style>
 
+    <style name="BoutonDialoguesAutorisation" parent="Theme.AppCompat">
+        <item name="colorButtonNormal">@color/BLANC</item>
+        <item name="colorControlHighlight">@color/GRIS_CHARTE_GRAPHIQUE</item>
+    </style>
+
 </resources>

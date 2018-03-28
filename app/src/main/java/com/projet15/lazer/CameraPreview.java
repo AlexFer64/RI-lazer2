@@ -18,24 +18,22 @@ import static android.content.ContentValues.TAG;
 public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback, Camera.PreviewCallback
 {
     private SurfaceHolder mHolder;
+    //camera
     private Camera mCamera;
-
     //Settings de la caméra
     private Camera.Parameters parameters;
     //taille de la "preview" de la caméra
-    private android.hardware.Camera.Size previewSize;
-    //tableau pour stocker les pixels en paires hexadécimales
-    private int[] pixels;
+
+    //définition  la taille de la préview
+    int HAUTEURPREVIEW=480;
+    int LARGEURPREVIEW=720;
 
     public CameraPreview(Context context, Camera camera) {
         super(context);
         mCamera = camera;
+        // Install a SurfaceHolder.Callback so we get notified when the underlying surface is created and destroyed.
 
 
-
-
-        // Install a SurfaceHolder.Callback so we get notified when the
-        // underlying surface is created and destroyed.
         mHolder = getHolder();
         mHolder.addCallback(this);
         // deprecated setting, but required on Android versions prior to 3.0
@@ -46,13 +44,13 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         // The Surface has been created, now tell the camera where to draw the preview.
         try {
             mCamera.setPreviewDisplay(holder);
-            mCamera.startPreview();
 
-            //récupérer les param de la caméra
+            //paramétrer la taille de la préview
             parameters = mCamera.getParameters();
-            previewSize = parameters.getPreviewSize();
-            pixels = new int[previewSize.width * previewSize.height]; //width sont des attributs et n'ont pas de getters
+            parameters.setPreviewSize(LARGEURPREVIEW,HAUTEURPREVIEW);
+            mCamera.setParameters(parameters);
 
+            mCamera.startPreview();
         } catch (IOException e) {
             Log.d(TAG, "Error setting camera preview: " + e.getMessage());
         }
@@ -68,17 +66,19 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
         try {
             mCamera.stopPreview();
-            android.hardware.Camera.Size s = mCamera.getParameters().getPreviewSize();
+
+            //paramétrer la taille de la préview
+            parameters = mCamera.getParameters();
+            parameters.setPreviewSize(LARGEURPREVIEW,HAUTEURPREVIEW);
+
+            mCamera.setParameters(parameters);
             mCamera.setPreviewDisplay(holder);
             mCamera.setPreviewCallback(this);
             mCamera.startPreview();
 
-            //récupérer les param de la caméra
-            parameters = mCamera.getParameters();
-            previewSize = parameters.getPreviewSize();
-            Log.e("TEST WIDTH", Integer.toString(previewSize.width));
-            Log.e("TEST HEIGH", Integer.toString(previewSize.height));
-            pixels = new int[previewSize.width * previewSize.height]; //width sont des attributs et n'ont pas de getters
+
+            Log.e("TEST WIDTH", Integer.toString(parameters.getPreviewSize().width));
+            Log.e("TEST HEIGH", Integer.toString(parameters.getPreviewSize().height));
         } catch (Exception ex) {
             return;
         }
@@ -86,10 +86,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void onPreviewFrame(byte[] data, Camera camera) {
-        //transformer les pixels du formats NV21 au format RGB
-        //decodePixels(pixels, data, previewSize.width, previewSize.height);
-
-        //Log.i("Pixels", "The top right pixel has the following RGB (hexadecimal) values:" +Integer.toHexString(pixels[0]));
+        //fonction exécuté à chaque frame capturé
     }
 
 
