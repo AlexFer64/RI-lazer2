@@ -47,8 +47,15 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
             //paramétrer la taille de la préview
             parameters = mCamera.getParameters();
+<<<<<<< HEAD
             parameters.setPreviewSize(LARGEURPREVIEW,HAUTEURPREVIEW);
             mCamera.setParameters(parameters);
+=======
+            parameters.setPreviewSize(720,480);
+            mCamera.setParameters(parameters);
+            previewSize = parameters.getPreviewSize();
+            pixels = new int[previewSize.width * previewSize.height]; //width sont des attributs et n'ont pas de getters
+>>>>>>> master
 
             mCamera.startPreview();
         } catch (IOException e) {
@@ -76,9 +83,19 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
             mCamera.setPreviewCallback(this);
             mCamera.startPreview();
 
+<<<<<<< HEAD
 
             Log.e("TEST WIDTH", Integer.toString(parameters.getPreviewSize().width));
             Log.e("TEST HEIGH", Integer.toString(parameters.getPreviewSize().height));
+=======
+            //récupérer les param de la caméra
+            parameters = mCamera.getParameters();
+            parameters.setPreviewSize(720,480);
+            previewSize = parameters.getPreviewSize();
+            Log.e("TEST WIDTH", Integer.toString(previewSize.width));
+            Log.e("TEST HEIGH", Integer.toString(previewSize.height));
+            pixels = new int[previewSize.width * previewSize.height]; //width sont des attributs et n'ont pas de getters
+>>>>>>> master
         } catch (Exception ex) {
             return;
         }
@@ -88,7 +105,6 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     public void onPreviewFrame(byte[] data, Camera camera) {
         //fonction exécuté à chaque frame capturé
     }
-
 
 
 }

@@ -4,7 +4,7 @@ package com.projet15.lazer;
  *
  * @author dalmau
  */
-public class YuvToRgb {
+public class  YuvToRgb {
     private byte[] yuv420sp;
     private int largeur, hauteur;
 

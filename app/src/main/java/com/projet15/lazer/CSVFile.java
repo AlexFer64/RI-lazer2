@@ -1,25 +1,31 @@
 package com.projet15.lazer;
 
+import android.content.Context;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
+import android.util.Log;
 
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 
 
-public class CSVFile extends File {
-    private File directory = new File("/");
+public class CSVFile extends File  {
+    private File directory = new File("/test");
     private String _separator;
-
+    private Context _ctx;
     public CSVFile(@NonNull String pathname,String separator) {
         super(pathname);
         _separator = separator;
     }
 
-    private boolean makedirectory(){
+    public boolean makedirectory(){
         if(directory.exists()){
             return directory.mkdir();
         }
@@ -31,24 +37,19 @@ public class CSVFile extends File {
         }
         return true;
     }
-    public void save(ArrayList<CoordonneesEnFonctionDuTemps> data)  throws IOException {
-        makedirectory(); //création du dossier si il n'existe pas
-        newFile();//création du nouveau fichier
 
-        this.setWritable(true); //autorise l'écriture sur le fichier
-        FileOutputStream fileOutputStream = new FileOutputStream(this.getAbsolutePath()); //conexion pour ecrire dans le fichier
+    @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
+    public void save(ArrayList<CoordonneesEnFonctionDuTemps> data) throws FileNotFoundException {
 
-        fileOutputStream.write(Byte.parseByte("seconde"+_separator+"x"+_separator+"y\n")); //Ecris l'entete du fichier
+
         for (int i = 0; i < data.size(); i++) {
             CoordonneesEnFonctionDuTemps courrant = data.get(i);
             String line = courrant.get_seconde() + _separator + courrant.get_x() + _separator + courrant.get_y() + "\n";
-            fileOutputStream.write(Byte.parseByte(line));
+            //Ecrire Line
         }
-        fileOutputStream.flush();
-        fileOutputStream.close();
-        this.setWritable(false);
 
 
     }
+
 
 }
