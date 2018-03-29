@@ -70,14 +70,10 @@ public class CameraActivity extends AppCompatActivity {
     private ImageView _imageView ;
 
     private ArrayList<CoordonneesEnFonctionDuTemps> donneesAenregistrer = new ArrayList<CoordonneesEnFonctionDuTemps>();
-<<<<<<< HEAD
-    private CSVFile fichierauvegarde = new CSVFile("/test.csv",",");
-=======
 
-    private Context context;
-    private File directory = new File("");
 
->>>>>>> master
+
+
 
     //Cycle de Vie de l'application
     @Override
@@ -138,33 +134,9 @@ public class CameraActivity extends AppCompatActivity {
          *                                                               *
          *****************************************************************/
 
-        File fichierASauvegarder = new File(directory, "test.csv");
-        Log.e("directory",fichierASauvegarder.getName());
-        boolean estCree = fichierASauvegarder.exists();
-        if(!estCree) {
-            try {
-
-                // To open you can choose the mode MODE_PRIVATE, MODE_APPEND,
-                // MODE_WORLD_READABLE, MODE_WORLD_WRITEABLE
-                // This is the creation mode (Private, World Readable et World Writable),
-                // Append is used to open the file and write at its end
-               FileOutputStream test = new FileOutputStream(fichierASauvegarder);
-               test.flush();
-               FileOutputStream fos = openFileOutput(fichierASauvegarder.getAbsolutePath(), Context.MODE_PRIVATE);
-                // Open the writer
-                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fos);
-                // Write
-                outputStreamWriter.write("test");
-                // Close streams
-                outputStreamWriter.close();
-                fos.close();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
+       if(CSVFile.sauvegarde(donneesAenregistrer,_parametreDeLexercice)){
+           Toast.makeText(getApplicationContext(), "Save successful", Toast.LENGTH_SHORT).show();
+       }
     }
 
 

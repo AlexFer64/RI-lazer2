@@ -25,22 +25,15 @@ public class MenuPrincipal extends  AppCompatActivity{
     private Button _managerButton; // représente le bouton "Data Manager"
 
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 1;
-
+    private static final int MY_PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE = 2;
+    private static final int MY_PERMISSION_REQUEST_READ_EXTERNAL_STORAGE = 3;
     //Constructeur
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
 
-        if (ContextCompat.checkSelfPermission(this, //Regarde si l'accès à la camera est autorisé
-                Manifest.permission.CAMERA)
-                != PackageManager.PERMISSION_GRANTED)
-        {
-                ActivityCompat.requestPermissions(this,
-                            new String[]{Manifest.permission.CAMERA},
-                            MY_PERMISSIONS_REQUEST_CAMERA);
-
-        }
+        autorisationRequest();
 
         /**transitions
         setupWindowAnimations();
@@ -158,6 +151,32 @@ public class MenuPrincipal extends  AppCompatActivity{
     }
 
     //Méthodes
+
+    private void autorisationRequest() {
+        if (ContextCompat.checkSelfPermission(this, //Regarde si l'accès à la camera est autorisé
+                Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA},
+                    MY_PERMISSIONS_REQUEST_CAMERA);
+
+        }
+
+        if (ContextCompat.checkSelfPermission(this, //Regarde si l'accès à la lecture est autorisé
+                Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    MY_PERMISSION_REQUEST_READ_EXTERNAL_STORAGE);
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    MY_PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE);
+
+        }
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[],
