@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.projet15.lazer.MenuPrincipal"
+    tools:context="com.projet15.lazer.ActivityMenuPrincipal"
     android:animateLayoutChanges="true">
 
     <LinearLayout
@@ -49,7 +49,8 @@
                 android:textAllCaps="false"
                 android:textSize="@dimen/TAILLE_TEXTE_BOUTON"
                 android:text="@string/STATIC_EXERCICE"
-                android:theme="@style/BoutonMenuPrincipal"/>
+                android:theme="@style/BoutonMenuPrincipal"
+                android:transitionName="@string/TransitionStatic"/>
 
         </FrameLayout>
         <FrameLayout
@@ -71,7 +72,8 @@
                 android:textSize="@dimen/TAILLE_TEXTE_BOUTON"
                 android:textAllCaps="false"
                 android:text="@string/RYTHM_EXERCICE"
-                android:theme="@style/BoutonMenuPrincipal"/>
+                android:theme="@style/BoutonMenuPrincipal"
+                android:transitionName="@string/TransitionRythm"/>
 
         </FrameLayout>
         <FrameLayout
@@ -92,7 +94,8 @@
                 android:textSize="@dimen/TAILLE_TEXTE_BOUTON"
                 android:textAllCaps="false"
                 android:text="@string/DATA_MANAGER"
-                android:theme="@style/BoutonMenuPrincipal"/>
+                android:theme="@style/BoutonMenuPrincipal"
+                android:transitionName="@string/TransitionData"/>
 
         </FrameLayout>
 

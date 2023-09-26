@@ -7,12 +7,12 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher_lazer"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/APP_NAME"
-        android:roundIcon="@mipmap/ic_launcher_lazer_round"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true">
         <activity
-            android:name=".MenuPrincipal"
+            android:name=".ActivityMenuPrincipal"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeMenuPrincipal">
             <intent-filter>
@@ -22,21 +22,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".StaticExerciceParameter"
+            android:name=".ActivityStaticExerciceParameter"
             android:label="@string/STATIC_EXERCICE"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeStaticExerciceParameter" />
         <activity
-            android:name=".RythmExerciceParameter"
+            android:name=".ActivityRythmExerciceParameter"
             android:label="@string/RYTHM_EXERCICE"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeRythmExerciceParameter" />
         <activity
-            android:name=".CameraActivity"
+            android:name=".ActivityCamera"
             android:label="@string/CAMERA"
             android:screenOrientation="landscape"
             android:theme="@style/AppThemeCamera" />
-        <activity android:name=".DataManagerActivity"></activity>
+        <activity android:name=".ActivityDataManager"
+            android:label="@string/DATA_MANAGER"
+            android:theme="@style/AppThemeDataManager" />
     </application>
 
 </manifest>

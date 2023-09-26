@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.projet15.lazer.MenuPrincipal"
+    tools:context="com.projet15.lazer.ActivityMenuPrincipal"
     android:animateLayoutChanges="true">
 
     <LinearLayout
